@@ -1,0 +1,4 @@
+# con esto se ignora la carpeta que quieras
+Nombre-de-carpeta
+
+#*.html (para ignorar 1 tipo de archivo en especifico)

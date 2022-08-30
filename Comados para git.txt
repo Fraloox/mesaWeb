@@ -1,0 +1,36 @@
+	En Git bash:
+
+git clone rutaHttps (Para clonar)
+
+cd ruta-de-la-carpeta/ (Para entrar a una carpeta)
+
+dir (Para ver los archivos que hay en la carpeta)
+
+git status (Para ver archivos modificados)
+
+git add Archivo.html (Para subir 1 archivo)
+
+git add . (Para subir todas las modificaciones)
+
+git commit -m "Mensaje" (Para hacer un commit con mensaje)
+
+git push (Para subir los commit al repositorio)
+
+git pull (Para traer los cambios del rapositorio a la pc)
+
+git branch (Nos dice en que rama estamos trabajando)
+
+git checkout -b Nombre-de-rama (Para crear una rama localmente)
+
+git ceckout Nombre-de-rama (Para cambiar de rama)
+
+git push --set-upstream origin Nombre-de-rama (Para crear la rama en el repositorio)
+
+git stash (Toma cambios actuales para guardarlos localmente)
+
+git stash apply (Para traer de nuevo los cambios)
+
+git checkout . (Para revertir todos los cambios de la rama)
+
+git log (Para ver todos los commits que se hicieron)
+
