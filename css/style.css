@@ -1,3 +1,8 @@
-.gradient-custom{
-    background: #e8eaeb;
+body{
+    background: #ebf4fd;
+}
+
+.bg{
+    background-image: url(../imagenes/Animacion.gif);
+    background-position: center center;
 }
