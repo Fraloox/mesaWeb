@@ -34,3 +34,5 @@ git checkout . (Para revertir todos los cambios de la rama)
 
 git log (Para ver todos los commits que se hicieron)
 
+
+
