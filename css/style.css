@@ -1,14 +1,12 @@
 body{
-    background: #3285EA;
-
-    
+    background: #3285EA;   
 }
 
 .bg{
-    background-image: url(../imagenes/Animacion.gif);
-    background-position: center center;
+    background-image: url(../imagenes/img-login.png);   
+    
     background-repeat: no-repeat;    
 }
-#row-principal{
+/* #row-principal{
     height: 67px;
-}
+} */
