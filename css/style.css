@@ -1,12 +1,11 @@
 body{
-    background: #3285EA;   
+    background: #0C0824;
+    background: linear-gradient(to right, #975B55,#D56C42);   
 }
 
 .bg{
-    background-image: url(../imagenes/img-login.png);   
-    
+    background-image: url(../imagenes/img-login-1.png);  
+    background-image: center center;    
     background-repeat: no-repeat;    
 }
-/* #row-principal{
-    height: 67px;
-} */
+
