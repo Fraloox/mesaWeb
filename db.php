@@ -1,4 +1,3 @@
 <?php
-
-    $conexion=mysqli_connect("localhost","root","","mesawebdb")
+    $conexion=mysqli_connect("localhost","root","","mesawebdb");
 ?>

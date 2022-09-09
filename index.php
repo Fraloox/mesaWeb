@@ -35,7 +35,7 @@
                   </div>
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="cotrasena">
+                    <input type="password" class="form-control" name="contrasena">
                   </div>
                   <div class="mb-4 form-check">
                     <input type="checkbox" name="connected" class="form-check-input" id="">
