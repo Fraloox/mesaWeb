@@ -1,0 +1,5 @@
+ID de cliente:
+375764542928-391a56s83jh1qam3eqlhke3shaagg518.apps.googleusercontent.com
+
+ID secreto de cliente:
+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
