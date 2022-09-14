@@ -54,7 +54,7 @@
                 </form>
 
                 <!-- LOGIN CON REDES SOCIALES -->
-                <div class="container w-100 my-5">
+                <!-- <div class="container w-100 my-5">
                   <div class="row text-center">
                     <div class="col-12">Iniciar Sesión</div>
                   </div>
@@ -87,6 +87,7 @@
                     </div>
                   </div>
                 </div>
+-->
             </div>
         </div>
     </div>
