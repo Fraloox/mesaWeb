@@ -30,11 +30,11 @@
 
                 <form action="validar.php" method="post">
                   <div class="mb-4">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" name="correo">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" name="dni">
                   </div>
                   <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="contrasena">
                   </div>
                   <div class="mb-4 form-check">
