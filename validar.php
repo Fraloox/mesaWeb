@@ -1,13 +1,13 @@
 <?php
-    $correo=$_POST['correo'];
+    $dni=$_POST['dni'];
     $contrasena=$_POST['contrasena'];
 
     session_start();
-    $_SESSION['correo']=$correo;
+    $_SESSION['dni']=$dni;
 
     include('db.php');
 
-    $consulta="SELECT*FROM usuarios where correo='$correo' and contrasena='$contrasena'";
+    $consulta="SELECT*FROM usuarios where dni='$dni' and contrasena='$contrasena'";
     $resultado=mysqli_query($conexion, $consulta);
 
     $filas=mysqli_num_rows($resultado);
