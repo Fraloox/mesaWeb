@@ -11,6 +11,9 @@
     <!-- Bootstrap 5 CSS-->
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     
+    <!-- svg --> 
+  
+
   </head>
   <body>
     
@@ -20,7 +23,7 @@
               
             </div>
             <div class="col bg-white p-5 rounded-end">
-                <div class="text-end" >
+                <div class="text-center" >
                     <img src="imagenes/Logo CPC solo.png" width="100" alt="">
                 </div>
 
@@ -28,30 +31,65 @@
 
                 <!-- LOGIN -->
 
-                <form action="validar.php" method="post">
+                <form action="validar.php" method="post" class="needs-validation mb-4">
+
                   <div class="mb-4">
                     <label for="dni" class="form-label">DNI</label>
-                    <input type="text" class="form-control" name="dni">
+
+                    <input type="text"
+                      class="form-control"
+                      name="dni" 
+                      id="dni" 
+                      pattern="[0-9]+" 
+                      maxlength="8" minlenght="4"
+                      required>
+
+                    <div class= "invalid-feedback">
+                      Complete el campo
+                    </div>
                   </div>
-                  <div class="mb-4">
+
+                  <div class="mb-4">                    
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="contrasena">
+
+                    <input type="password"
+                    class="form-control" 
+                    name="contrasena" 
+                    id="contrasena"
+                    maxlength="20" minlenght="5"
+                    required>
+
+                    <div class= "invalid-feedback">
+                      Complete el campo
+                    </div>
                   </div>
-                  <div class="mb-4 form-check">
+                  <!-- <div class="mb-4 form-check">
                     <input type="checkbox" name="connected" class="form-check-input" id="">
                     <label for="connected" class="form-check-label">Mantenerme conectado</label>
+                  </div> -->
+                  
+                  <div class="alert alert-danger text-center" id="error-alert">
+                      La contraseña es incorrecta
+                  </div>
+
+                  <div class="d-grid" >
+                    <button type="submit" class="btn btn-primary" id="btn-iniciarSesion">Iniciar Sesión</button>
                   </div>
 
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                    <button type="button" class="btn btn-alert" onclick="mostrarError();"></button>
+                  </div>
+                  <div class="d-grid">
+                    <button type="button" class="btn btn-primary" onclick="ocultarError();"></button>
                   </div>
 
-                  <div class="my-3">
-                    <!-- <span>No tienes cuenta? <a href="#">Regstrate</a></span> <br>
-                    <span><a href="#">Recuperar Password</a></span> -->
-                  </div>
 
-                </form>
+                  <!--<div class="my-3">
+                     <span>No tienes cuenta? <a href="#">Regstrate</a></span> <br>
+                    <span><a href="#">Recuperar Password</a></span> 
+                  </div> -->                 
+
+                </form>               
 
                 <!-- LOGIN CON REDES SOCIALES -->
                 <!-- <div class="container w-100 my-5">
@@ -90,10 +128,17 @@
 -->
             </div>
         </div>
-    </div>
+    </div>    
 
     <!-- Scripts-->
     <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script> src="funciones/funciones-login.js"</script>
     
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>  
+  
+  
   </body>
+
+    
 </html>
