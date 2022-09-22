@@ -1,5 +1,5 @@
 function mostrarError(){
-  document.getElementsById('error-alert').style.display = 'block';
+  document.getElementById('error-alert').style.display = 'block';
 }
 
 function ocultarError(){

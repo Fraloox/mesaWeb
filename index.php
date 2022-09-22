@@ -3,18 +3,19 @@
   <head>
   <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>   
+    <title>Login</title>     
+
+    <!-- Bootstrap 5 CSS-->
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
 
     <!-- CSS -->
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- Bootstrap 5 CSS-->
-    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     
     <!-- svg --> 
   
 
   </head>
+
   <body>
     
     <div class="container w-75 bg-primary mt-5 mb-5 rounded shadow">
@@ -31,7 +32,7 @@
 
                 <!-- LOGIN -->
 
-                <form action="validar.php" method="post" class="needs-validation mb-4">
+                <form  method="post" class="needs-validation mb-4">
 
                   <div class="mb-4">
                     <label for="dni" class="form-label">DNI</label>
@@ -68,21 +69,38 @@
                     <label for="connected" class="form-check-label">Mantenerme conectado</label>
                   </div> -->
                   
-                  <div class="alert alert-danger text-center" id="error-alert">
+                  <!-- <div class="alert alert-danger text-center" >
+                      La contraseña es incorrecta
+                  </div> -->
+                  <div id="error-alert">
                       La contraseña es incorrecta
                   </div>
 
                   <div class="d-grid" >
-                    <button type="submit" class="btn btn-primary" id="btn-iniciarSesion">Iniciar Sesión</button>
+                    <button type="submit" 
+                    class="btn btn-primary" 
+                    id="btn-iniciarSesion">
+                      Iniciar Sesión
+                    </button>
                   </div>
-
-                  <div class="d-grid">
-                    <button type="button" class="btn btn-alert" onclick="mostrarError();"></button>
+                  
+                  <div class="d-grid" >
+                    <button type="button" 
+                    class="btn btn-primary" 
+                    id="btn-ocultar-error"
+                    onclick="ocultarError();">
+                    ocultar error
+                  </button>
                   </div>
-                  <div class="d-grid">
-                    <button type="button" class="btn btn-primary" onclick="ocultarError();"></button>
+                  
+                  <div class="d-grid" >
+                    <button type="button" 
+                    class="btn btn-primary" 
+                    id="btn-mostrar-error"
+                    onclick="mostrarError();">
+                    mostrar error
+                  </button>
                   </div>
-
 
                   <!--<div class="my-3">
                      <span>No tienes cuenta? <a href="#">Regstrate</a></span> <br>
@@ -132,7 +150,7 @@
 
     <!-- Scripts-->
     <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script> src="funciones/funciones-login.js"</script>
+    <script type="text/javascript" src="funciones/funciones-login.js"> </script>
     
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>  
