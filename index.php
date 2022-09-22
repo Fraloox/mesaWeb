@@ -33,10 +33,10 @@
 
                 <form action="validar.php" method="post" class="needs-validation mb-4">
 
-                  <div class="mb-4">
+                  <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->
                     <label for="dni" class="form-label">DNI</label>
 
-                    <input type="text"
+                    <input type="text" 
                       class="form-control"
                       name="dni" 
                       id="dni" 
@@ -49,7 +49,7 @@
                     </div>
                   </div>
 
-                  <div class="mb-4">                    
+                  <div class="mb-4"> <!-- ESTE ES EL IMPUT CONTRASEÑA -->                  
                     <label for="password" class="form-label">Contraseña</label>
 
                     <input type="password"
@@ -68,7 +68,7 @@
                     <label for="connected" class="form-check-label">Mantenerme conectado</label>
                   </div> -->
                   
-                  <div class="alert alert-danger text-center" id="error-alert">
+                  <div class="alert alert-danger text-center" id="error-alert"> <!-- ALERTA -->
                       La contraseña es incorrecta
                   </div>
 
