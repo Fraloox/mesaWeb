@@ -26,15 +26,15 @@
         $filas=mysqli_num_rows($resultado);
 
         if($filas){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
-            header("location:home.php");
+            header("location:../home.php");
         }else{          
             
-            include("index.php");
+            include("../index.php");
             echo "<script> mostrarError('Contraseña Incorrecta'); </script>";
         }
     }else{
         
-        include("index.php");
+        include("../index.php");
         echo "<script> mostrarError('No se encontró al usuario'); </script>";
 
     }    
