@@ -32,7 +32,7 @@
 
                 <!-- LOGIN -->
 
-                <form action="php-login/validar.php" method="post" class="needs-validation mb-4">
+                <form action="validar.php" method="post" class="needs-validation mb-4">
 
                   <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->
                     <label for="dni" class="form-label">DNI</label>
@@ -74,7 +74,7 @@
                       La contraseña es incorrecta
                   </div> -->
                   <div id="error-alert"> <!-- Esta es la alerta de error -->
-                    La contraseña es incorrecta
+                    Mensaje de error
                   </div>
 
                   <div class="d-grid" > <!-- Botón de iniciar sesion -->
