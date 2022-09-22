@@ -32,7 +32,7 @@
 
                 <!-- LOGIN -->
 
-                <form  method="post" class="needs-validation mb-4">
+                <form action="validar.php" method="post" class="needs-validation mb-4">
 
                   <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->
                     <label for="dni" class="form-label">DNI</label>
@@ -42,7 +42,7 @@
                       name="dni" 
                       id="dni" 
                       pattern="[0-9]+" 
-                      maxlength="8" minlenght="4"
+                      maxlength="8" minlenght="8"
                       required>
 
                     <div class= "invalid-feedback">
@@ -73,35 +73,17 @@
                   <!-- <div class="alert alert-danger text-center" >
                       La contraseña es incorrecta
                   </div> -->
-                  <div id="error-alert"> 
+                  <div id="error-alert"> <!-- Esta es la alerta de error -->
                     La contraseña es incorrecta
                   </div>
 
-                  <div class="d-grid" >
+                  <div class="d-grid" > <!-- Botón de iniciar sesion -->
                     <button type="submit" 
                     class="btn btn-primary" 
                     id="btn-iniciarSesion">
                       Iniciar Sesión
                     </button>
-                  </div>
-                  
-                  <div class="d-grid" >
-                    <button type="button" 
-                    class="btn btn-primary" 
-                    id="btn-ocultar-error"
-                    onclick="ocultarError();">
-                    ocultar error
-                  </button>
-                  </div>
-                  
-                  <div class="d-grid" >
-                    <button type="button" 
-                    class="btn btn-primary" 
-                    id="btn-mostrar-error"
-                    onclick="mostrarError();">
-                    mostrar error
-                  </button>
-                  </div>
+                  </div> 
 
                   <!--<div class="my-3">
                      <span>No tienes cuenta? <a href="#">Regstrate</a></span> <br>

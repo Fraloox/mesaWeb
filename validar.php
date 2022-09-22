@@ -27,16 +27,15 @@
 
         if($filas){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
             header("location:home.php");
-        }else{
-          
-            echo "<script> mostrarError(#contrasena); </script>";
+        }else{          
+            
             include("index.php");
-           
+            echo "<script> mostrarError('Contraseña Incorrecta'); </script>";
         }
     }else{
-
-        echo "<script> mostrarError(#dni) </script>";
+        
         include("index.php");
+        echo "<script> mostrarError('No se encontró al usuario'); </script>";
 
     }    
     

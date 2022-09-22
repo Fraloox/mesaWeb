@@ -1,7 +1,13 @@
-function mostrarError(){
-  document.getElementById('error-alert').style.display = 'block';
+function mostrarError(mensaje){
+
+  document.getElementById('error-alert').textContent = mensaje;
+
+  document.getElementById('error-alert').style.display = 'block'; 
+
 }
 
-function ocultarError(){
+function ocultarError(){  
+
   document.getElementById('error-alert').style.display = 'none';
+
 }
