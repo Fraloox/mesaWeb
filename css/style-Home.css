@@ -1,0 +1,44 @@
+:root {
+    --offcanvas-width: 270px;
+    --topNavbarHeight: 56px;
+}
+
+.sidebar-nav{
+    width: var(--offcanvas-width);
+    top: var(--topNavbarHeight);   
+}
+.sidebar-link{
+    display: flex;
+    align-items: center;
+}
+.sidebar-link .right-icon{
+    display: inline-flex;
+    transition: all ease 0.25s;
+}
+.sidebar-link[aria-expanded="true"] .right-icon{
+    transform: rotate(180deg);
+}
+
+
+@media (min-width:992px) {
+
+    body {
+        overflow: auto !important;
+    }
+
+    .offcanvas-backdrop::before {
+        display: none;
+    }
+
+    .sidebar-nav {
+        transform: none;
+        visibility: visible !important;
+        /* hace que el canvas cargue por defecto y no se pueda cerrar*/
+
+        top: var(--topNavbarHeight);
+        /*saca el height del navbar*/
+        
+        height: calc(100% - var(--topNavbarHeight));
+        /*le da el height al menú con el caluculo del height del navbar - 100%*/
+    }
+}
