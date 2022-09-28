@@ -1,0 +1,1 @@
+INSERT INTO `usuarios`(`nombre`, `apellido`, `dni`, `email`, `dirección`, `telefono`, `contrasena`, `rol`) VALUES ('Lautaro Joel','Franco','43529886','lautarofranco75@gmail.com','Poujade casa 7878, calle 47 y 160','3764604104','LautaroFranco1','1')

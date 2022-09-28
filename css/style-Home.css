@@ -42,3 +42,11 @@
         /*le da el height al menú con el caluculo del height del navbar - 100%*/
     }
 }
+
+main{
+    margin-left: var(--offcanvas-width);
+}
+
+.crud-body{
+    width: calc(100% - var(--offcanvas-width));
+}
