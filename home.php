@@ -1,7 +1,7 @@
 <?php
   include_once "conexion.php";
   $sentencia = $bd -> query ("SELECT * FROM usuarios");
-  $persona = $sentencia ->fetchAll(PDO::FETCH_OBJ);
+  $personas = $sentencia ->fetchAll(PDO::FETCH_OBJ);
   
 ?>
 
@@ -166,11 +166,11 @@
 
       <div class="row justify-content-center">
 
-      <!-- TABLA -->
+        <!-- TABLA -->
 
-          <div class="col-md-7">
+          <div class="col">
 
-            <div class="card">
+            <div class="card mx-5">
 
                 <div class="card-header">                  
                   Lista de personas
@@ -179,12 +179,13 @@
                 <div class="p-4">
 
                   <div class="table-responsive align-middle">
-                    <table class="table table-primary">
+                    <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
                           <th scope="col">DNI</th>
+                          <th scope="col">Teléfono</th>
                           <th scope="col">Opciones<th>
                         </tr>
                       </thead>
@@ -192,16 +193,72 @@
                       <tbody>
 
                         <?php
-                          foreach ($persona as $dato) {
+                        
+                          foreach ($personas as $dato) {
 
-                        ?>
+                        ?>                         
 
                         <tr>
-                          <td scope="row"><?php echo $dato->nombre; ?></td>
+                          <!-- input hidden para datos -->
+                          <input type="hidden"
+                          id="dato_id"
+                          value="<?php echo $dato->id; ?>">
+
+                          <input type="hidden"
+                          id="dato_nombre"
+                          value="<?php echo $dato->nombre; ?>">
+
+                          <input type="hidden"
+                          id="dato_apellido"
+                          value="<?php echo $dato->apellido; ?>">
+
+                          <input type="hidden"
+                          id="dato_dni"
+                          value="<?php echo $dato->dni; ?>">
+
+                          <input type="hidden"
+                          id="dato_telefono"
+                          value="<?php echo $dato->telefono; ?>">
+
+                          <input type="hidden"
+                          id="dato_email"
+                          value="<?php echo $dato->email; ?>">
+
+                          <input type="hidden"
+                          id="dato_direccion"
+                          value="<?php echo $dato->direccion; ?>">
+
+                          <input type="hidden"
+                          id="dato_rol"
+                          value="<?php echo $dato->rol; ?>">
+                          <!-- input hidden para datos -->
+
+                          <td scope="row" ><?php echo $dato->nombre; ?></td>
                           <td><?php echo $dato->apellido; ?></td>
                           <td><?php echo $dato->dni; ?></td>
-                          <td><i class="bi bi-pencil-square"></i></td>
-                          <td><i class="bi bi-trash"></i></td>                          
+                          <td><?php echo $dato->telefono; ?> </td>
+                        
+                          <td>
+                            <a type="button" 
+                            class="btn btn-primary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#staticBackdrop"
+                            onClick="cargarDatos();">
+
+                              <i class="bi bi-pencil-square"></i>
+
+                            </a>                            
+                          
+                            <a href="#"
+                            class="btn btn-danger">
+
+                              <i class="bi bi-trash"></i>
+
+                            </a>
+                            
+                        
+                          </td>
+
                         </tr>
                         
                         <?php
@@ -221,63 +278,184 @@
 
           </div>
 
-    <!-- TABLA -->
+        <!-- TABLA -->
 
-    <!-- FORMULARIO -->
+        <!-- MODAL -->
 
-          <div class="col-md-4">
+          <div class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true">
 
-            <div class="card">
+            <div class="modal-dialog">
 
-              <div class="card-header">
-                  Ingresar datos:
+              <div class="modal-content">
+
+                <div class="modal-header">
+
+                  <h5 class="modal-title"
+                  id="staticBackdropLabel">
+                      Edición de datos
+                  </h5>
+
+                  <button type="button" 
+                  class="btn-close" 
+                  data-bs-dismiss="modal" 
+                  aria-label="Close">
+                  </button>
+
+                </div>
+
+                  <!-- FORMULARIO -->
+
+                <form action="registrar.php" 
+                method="POST">
+
+                  <div class="modal-body">
+
+                    <div class="container">                    
+
+                      <div class="row">
+
+                        <div class="col-md-6">
+                          
+                          <input type="text"
+                          class="form-control mb-2"
+                          id="txtNombre" 
+                          name="txtNombre"
+                          placeholder= "Nombre" 
+                          value=""
+                          autofocus>
+                        
+                        </div>
+
+                        <div class="col-md-6">
+                  
+                          <input type="text"
+                          class="form-control mb-2"
+                          id="txtApellido" 
+                          name="txtApellido"
+                          placeholder= "Apellido"
+                          value="" 
+                          autofocus>
+                        
+                        </div>
+
+                      </div>
+                      
+                      <div class="row">                       
+
+                        <div class="col-md-6">
+
+                          <input type="text"
+                            class="form-control mb-2" 
+                            id="txtTelefono"
+                            name="txtTelefono"
+                            placeholder= "Teléfono" 
+                            value=""
+                            autofocus>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                          <input type="text"
+                            class="form-control mb-2"
+                            id="txtDni" 
+                            name="txtDni"
+                            placeholder= "DNI" 
+                            value=""
+                            autofocus>
+
+                        </div>                        
+
+                      </div>
+
+                      <div class="row mt-2">
+
+                        <div class="col-md-7">
+
+                          <input type="text"
+                            class="form-control mb-2"
+                            id="txtEmail" 
+                            name="txtEmail"
+                            placeholder="Email" 
+                            value=""
+                            autofocus>
+
+                        </div>
+
+                        <div class="col-md-5">
+
+                          <select class="form-select mb-2" 
+                          aria-label="Default select example"
+                          id="sctRol">
+
+                            <option selected>Rol</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Empleado</option> 
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col">
+
+                          <input type="text"
+                            class="form-control mb-2" 
+                            id="txtDireccion"
+                            name="txtDireccion"
+                            placeholder="Dirección" 
+                            value=""
+                            autofocus>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </form>
+
+                  <!-- FORMULARIO -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Gardar</button>
+                </div>
+
               </div>
 
-              <form class="p-4" action="registrar.php" method="POST">
-
-                <div class="mb-3">
-                  <label class="form-label">Nombre: </label>
-                  <input type="text" class="form-control" name="txtNombre" autofocus>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Apellido: </label>
-                  <input type="text" class="form-control" name="txtApellido" autofocus>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Teléfono: </label>
-                  <input type="text" class="form-control" name="txtTel" autofocus>
-                </div>
-
-                <div class="d-grid">
-                  <input type="hidden" name="oculto" value="1">
-                  <input type="submit" class="btn btn-primary" value="Registrar">
-                </div>
-
-              </form>              
-
             </div>
-
+        
           </div>
 
-          <!-- FORMULARIO -->
+        <!-- MODAL -->      
 
       </div>
 
     </div>
 
   </main>
-  <!-- CRUD -->
-
-
-
-  <!-- Scripts-->
-  <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- CRUD -->  
 
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
+
+  <!-- Scripts-->
+  <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="funciones/funciones-home.js"></script>
 </body>
 
 </html>
