@@ -26,6 +26,11 @@
         overflow: auto !important;
     }
 
+    .main{
+        margin-left: var(--offcanvas-width);    
+        
+    }
+
     .offcanvas-backdrop::before {
         display: none;
     }
@@ -41,10 +46,13 @@
         height: calc(100% - var(--topNavbarHeight));
         /*le da el height al menú con el caluculo del height del navbar - 100%*/
     }
+
+    
 }
 
 main{
-    margin-left: var(--offcanvas-width);
+    
+    margin-left: 5px;
 }
 
 .crud-body{

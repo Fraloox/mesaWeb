@@ -160,7 +160,7 @@
   <!-- OFFCANVAS -->
 
   <!-- CRUD -->
-  <main class="mt-5 pt-3">
+  <main class="mt-5 pt-3 main" >
 
     <div class="conteiner mt-5">
 
