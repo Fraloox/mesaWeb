@@ -174,6 +174,16 @@
 
                 <div class="card-header">                  
                   Lista de personas
+
+                  <a href="#"
+                  class="btn btn-success"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#staticBackdrop"
+                  onClick="clearDatos();">
+
+                  <i class="bi bi-person-plus-fill"></i>
+
+                  </a>
                 </div>
 
                 <div class="p-4">
@@ -252,7 +262,7 @@
                             <a href="#"
                             class="btn btn-danger">
 
-                              <i class="bi bi-trash"></i>
+                            <i class="bi bi-trash3-fill"></i>
 
                             </a>
                             
@@ -320,8 +330,8 @@
 
                       <div class="row">
 
-                        <div class="col-md-6">
-                          
+                        <div class="col-md-6">                          
+
                           <input type="text"
                           class="form-control mb-2"
                           id="txtNombre" 
@@ -394,7 +404,7 @@
                           aria-label="Default select example"
                           id="sctRol">
 
-                            <option selected>Rol</option>
+                            <option value="0">Rol</option>
                             <option value="1">Administrador</option>
                             <option value="2">Empleado</option> 
 
@@ -429,8 +439,14 @@
                   <!-- FORMULARIO -->
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Gardar</button>
+
+                  <button type="button" 
+                  class="btn btn-secondary" 
+                  data-bs-dismiss="modal">Close</button>
+
+                  <button type="button" 
+                  class="btn btn-primary">Gardar</button>
+                  
                 </div>
 
               </div>
