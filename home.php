@@ -204,7 +204,7 @@
 
                         <?php
                         
-                          foreach ($personas as $dato) {
+                          foreach ($personas as $dato) { //COMIENZA EL FOREACH
 
                         ?>                         
 
@@ -273,7 +273,7 @@
                         
                         <?php
 
-                          }
+                          } //TERMINA EL FOREACH
 
                         ?>
 
@@ -336,9 +336,11 @@
                           class="form-control mb-2"
                           id="txtNombre" 
                           name="txtNombre"
-                          placeholder= "Nombre" 
+                          placeholder= "Nombre"
                           value=""
-                          autofocus>
+                          autofocus
+                          maxlength="20" minlenght="3"
+                          required>
                         
                         </div>
 
@@ -350,7 +352,9 @@
                           name="txtApellido"
                           placeholder= "Apellido"
                           value="" 
-                          autofocus>
+                          autofocus
+                          maxlength="20" minlenght="3"
+                          required>
                         
                         </div>
 
@@ -366,7 +370,10 @@
                             name="txtTelefono"
                             placeholder= "Teléfono" 
                             value=""
-                            autofocus>
+                            autofocus
+                            pattern="[0-9]+" 
+                            maxlength="10" minlenght="10"
+                            required>
 
                         </div>
 
@@ -378,7 +385,10 @@
                             name="txtDni"
                             placeholder= "DNI" 
                             value=""
-                            autofocus>
+                            autofocus
+                            pattern="[0-9]+" 
+                            maxlength="8" minlenght="8"
+                            required>
 
                         </div>                        
 
@@ -393,8 +403,10 @@
                             id="txtEmail" 
                             name="txtEmail"
                             placeholder="Email" 
-                            value=""
-                            autofocus>
+                            value=""                            
+                            autofocus
+                            maxlength="30" minlenght="3"
+                            required>
 
                         </div>
 
@@ -402,9 +414,11 @@
 
                           <select class="form-select mb-2" 
                           aria-label="Default select example"
-                          id="sctRol">
+                          id="sctRol"
+                          name="sctRol"
+                          required>
 
-                            <option value="0">Rol</option>
+                            <option value="">Rol</option>
                             <option value="1">Administrador</option>
                             <option value="2">Empleado</option> 
 
@@ -424,7 +438,9 @@
                             name="txtDireccion"
                             placeholder="Dirección" 
                             value=""
-                            autofocus>
+                            autofocus
+                            maxlength="100" minlenght="10"
+                            required>
 
                         </div>
 
@@ -434,20 +450,20 @@
 
                   </div>
 
-                </form>
-
-                  <!-- FORMULARIO -->
-
-                <div class="modal-footer">
+                  <div class="modal-footer">
 
                   <button type="button" 
                   class="btn btn-secondary" 
-                  data-bs-dismiss="modal">Close</button>
+                  data-bs-dismiss="modal">Cerrar</button>
 
-                  <button type="button" 
-                  class="btn btn-primary">Gardar</button>
+                  <button type="submit" 
+                  class="btn btn-primary">Guardar</button>
                   
                 </div>
+
+                </form>
+
+                  <!-- FORMULARIO -->                
 
               </div>
 

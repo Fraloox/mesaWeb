@@ -9,14 +9,10 @@ var email = document.getElementById("txtEmail");
 var rol = document.getElementById("sctRol");
 var direccion = document.getElementById("txtDireccion");
 
-//inicializo una variable para verificar si quiere dar de alta o modificar
-var edit_alta = true //false para editar / true para alta
 
 /* *** FUNCIONES ***  */ 
 
-function cargarDatos(){
-
-    edit_alta = false;
+function cargarDatos(){    
 
     //cargo el elemento con el valor que esta en un input hidden
     nombre.value = document.getElementById("dato_nombre").value;
@@ -31,15 +27,19 @@ function cargarDatos(){
 
 function clearDatos(){
 
-    edit_alta = true;
-
     //sirve para limbiar los campos
     nombre.value = "";
     apellido.value = "";
     dni.value = "";
     telefono.value = "";
     email.value = "";
-    rol.value.rol ;
+    rol.selectedIndex;
     direccion.value= "";
+
+}
+
+function alta_edit(){
+
+
 
 }
