@@ -1,19 +1,27 @@
 <?php
+    
+    include('db.php');
 
-    print_r($_POST);
+    $nombre = $_POST["txtNombre"];
+    $apellido = $_POST["txtApellido"];
+    $telefono = $_POST["txtTelefono"];
+    $dni = $_POST["txtDni"];
+    $email = $_POST["txtEmail"];
+    $rol = $_POST["sctRol"];
+    $direccion = $_POST["txtDireccion"];
 
-    if(
-    empty($_POST["txtNombre"]) || 
-    empty($_POST["txtApellido"]) || 
-    empty($_POST["txtTelefono"]) || 
-    empty($_POST["txtDni"]) ||
-    empty($_POST["txtEmail"]) ||
-    empty($_POST["sctRol"]) ||
-    empty($_POST["txtDireccion"])
-    ){
+    $sentencia = $bd->prepare(
+        "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, rol, direccion)
+        VALUES (?,?,?);");
+    
+    $resultado= $sentencia->execute(
+        [$nombre, $apellido, $telefono, $dni, $email, $rol, $direccion]);
 
-        
 
+    if($resultado === TRUE){
+
+        echo 'OK';
+    }else{
+        echo 'NO';
     }
-
 ?>

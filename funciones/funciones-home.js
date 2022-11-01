@@ -27,13 +27,13 @@ function cargarDatos(){
 
 function clearDatos(){
 
-    //sirve para limbiar los campos
+    //sirve para limpiar los campos
     nombre.value = "";
     apellido.value = "";
     dni.value = "";
     telefono.value = "";
     email.value = "";
-    rol.selectedIndex;
+    rol.value = "";
     direccion.value= "";
 
 }
