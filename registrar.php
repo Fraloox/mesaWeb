@@ -1,6 +1,8 @@
 <?php
     
-    include('db.php');
+    print_r($_POST);
+
+    include_once 'conexion.php';
 
     $nombre = $_POST["txtNombre"];
     $apellido = $_POST["txtApellido"];
@@ -12,10 +14,9 @@
 
     $sentencia = $bd->prepare(
         "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, rol, direccion)
-        VALUES (?,?,?);");
+        VALUES (?,?,?,?,?,?,?);");
     
-    $resultado= $sentencia->execute(
-        [$nombre, $apellido, $telefono, $dni, $email, $rol, $direccion]);
+    $resultado = $sentencia->execute([$nombre,$apellido,$telefono,$dni,$email,$rol,$direccion]);
 
 
     if($resultado === TRUE){

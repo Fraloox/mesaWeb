@@ -38,8 +38,25 @@ function clearDatos(){
 
 }
 
-function alta_edit(){
+function vista_form(){//es para la visibilidad de la contraseña
 
+    let pass = document.getElementById('contrasena');
+    let ver = document.getElementById('ver');
+    let ocultar = document.getElementById('ocultar');
 
+    if(pass.type === 'password'){
+
+        pass.type = 'text';
+        ver.style.display = 'none';
+        ocultar.style.display = 'block';
+
+    }else{
+
+        pass.type = 'password';
+        ver.style.display = 'block';
+        ocultar.style.display = 'none';
+
+    }
 
 }
+

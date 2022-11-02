@@ -396,7 +396,7 @@
 
                       <div class="row mt-2">
 
-                        <div class="col-md-7">
+                        <div class="col-md-6">
 
                           <input type="text"
                             class="form-control mb-2"
@@ -406,6 +406,42 @@
                             value=""                            
                             autofocus
                             maxlength="30" minlenght="3"
+                            required>
+
+                        </div>
+                        
+                        <div class="col-md-6 input-group w-50 h-100">
+
+                          <input type="password"
+                            class="form-control" 
+                            name="contrasena"
+                            placeholder="Contraseña" 
+                            id="contrasena"
+                            maxlength="20" minlenght="5"
+                            required>
+                          
+                            <span class="input-group-text" onclick="vista_form();">
+                              <i class="bi bi-eye" id="ver"></i>
+                              <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
+                            </span>
+                                                                          
+
+                        </div>                                            
+
+                      </div>
+
+                      <div class="row mt-2">
+
+                        <div class="col-md-7">
+
+                          <input type="text"
+                            class="form-control mb-2" 
+                            id="txtDireccion"
+                            name="txtDireccion"
+                            placeholder="Dirección" 
+                            value=""
+                            autofocus
+                            maxlength="100" minlenght="10"
                             required>
 
                         </div>
@@ -423,24 +459,6 @@
                             <option value="2">Empleado</option> 
 
                           </select>
-
-                        </div>
-
-                      </div>
-
-                      <div class="row">
-
-                        <div class="col">
-
-                          <input type="text"
-                            class="form-control mb-2" 
-                            id="txtDireccion"
-                            name="txtDireccion"
-                            placeholder="Dirección" 
-                            value=""
-                            autofocus
-                            maxlength="100" minlenght="10"
-                            required>
 
                         </div>
 
