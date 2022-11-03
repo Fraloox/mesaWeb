@@ -32,9 +32,11 @@ function clearDatos(){
     apellido.value = "";
     dni.value = "";
     telefono.value = "";
-    email.value = "";
+    email.value = "";    
     rol.value = "";
     direccion.value= "";
+
+    document.getElementById("txtContrasena").value = "";
 
 }
 
@@ -59,4 +61,20 @@ function vista_form(){//es para la visibilidad de la contraseña
     }
 
 }
+
+// *** ERROR ALERT ***
+
+function mostrarError(mensaje){
+
+    document.getElementById('error-alert').textContent = mensaje;
+  
+    document.getElementById('error-alert').style.display = 'block'; 
+  
+  }
+  
+  function ocultarError(){  
+  
+    document.getElementById('error-alert').style.display = 'none';
+  
+  }
 

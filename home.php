@@ -1,7 +1,7 @@
 <?php
   include_once "conexion.php";
-  $sentencia = $bd -> query ("SELECT * FROM usuarios");
-  $personas = $sentencia ->fetchAll(PDO::FETCH_OBJ);
+  $sentencia = $bd-> query("SELECT * FROM usuarios");
+  $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
   
 ?>
 
@@ -164,13 +164,34 @@
 
     <div class="conteiner mt-5">
 
-      <div class="row justify-content-center">
+      <div class="row justify-content-center">        
 
         <!-- TABLA -->
 
           <div class="col">
 
             <div class="card mx-5">
+
+              <!-- ALERTA -->
+
+                <?php
+
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'registrado'){
+
+                ?>
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>Registrado!</strong> Se agregaron los datos.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <?php
+
+                  }
+
+                ?>
+
+              <!-- ALERTA -->
 
                 <div class="card-header">                  
                   Lista de personas
@@ -414,9 +435,9 @@
 
                           <input type="password"
                             class="form-control" 
-                            name="contrasena"
+                            name="txtContrasena"
                             placeholder="Contraseña" 
-                            id="contrasena"
+                            id="txtContrasena"
                             maxlength="20" minlenght="5"
                             required>
                           
@@ -470,14 +491,18 @@
 
                   <div class="modal-footer">
 
-                  <button type="button" 
-                  class="btn btn-secondary" 
-                  data-bs-dismiss="modal">Cerrar</button>
+                    <div class="w-100 h-100" id="error-alert"> <!-- Esta es la alerta de error -->
+                      Mensaje de error
+                    </div>
 
-                  <button type="submit" 
-                  class="btn btn-primary">Guardar</button>
+                    <button type="button" 
+                    class="btn btn-secondary" 
+                    data-bs-dismiss="modal">Cerrar</button>
+
+                    <button type="submit" 
+                    class="btn btn-primary">Guardar</button>
                   
-                </div>
+                  </div>
 
                 </form>
 

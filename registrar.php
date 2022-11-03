@@ -9,20 +9,24 @@
     $telefono = $_POST["txtTelefono"];
     $dni = $_POST["txtDni"];
     $email = $_POST["txtEmail"];
+    $contrasena = $_POST["txtContrasena"];
     $rol = $_POST["sctRol"];
     $direccion = $_POST["txtDireccion"];
 
     $sentencia = $bd->prepare(
-        "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, rol, direccion)
-        VALUES (?,?,?,?,?,?,?);");
+        "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, contrasena, rol, direccion)
+        VALUES (?,?,?,?,?,?,?,?);");
     
-    $resultado = $sentencia->execute([$nombre,$apellido,$telefono,$dni,$email,$rol,$direccion]);
+    $resultado = $sentencia->execute([$nombre,$apellido,$telefono,$dni,$email, $contrasena,$rol,$direccion]);
 
 
     if($resultado === TRUE){
 
-        echo 'OK';
+        header('Location: home.php?mensaje=registrado');
+
     }else{
-        echo 'NO';
+        include("home.php");
+        echo "<script> mostrarError('Error al dar de alta'); </script>";
+
     }
 ?>
