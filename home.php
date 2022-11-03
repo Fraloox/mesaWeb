@@ -2,48 +2,42 @@
   include_once "conexion.php";
   $sentencia = $bd-> query("SELECT * FROM usuarios");
   $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+  include 'template/headerHome.php'
   
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-
-  <!-- Bootstrap 5 CSS-->
-  <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet" />
-
-  <!--My CSS-->
-  <link href="css/style-Home.css" rel="stylesheet" />
-
-</head>
-
-<body>
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
     <div class="container-fluid">
 
       <!--offcanvas trigger-->
-      <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <button class="navbar-toggler " 
+      type="button" 
+      data-bs-toggle="offcanvas" 
+      data-bs-target="#offcanvasExample" 
+      aria-controls="offcanvasExample">
+
         <span class="navbar-toggler-icon" data-bs-target="#offcanvasExample"></span>
+
       </button>
       <!--offcanvas trigger-->
 
-      <a class="navbar-brand fw-bold text-uppercase me-auto" href="#">C.P.C.®</a>
+      <a class="navbar-brand fw-bold text-uppercase me-auto" href="home.php">C.P.C.®</a>
 
       <ul class="navbar-nav ">
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" 
+          href="#" id="navbarDropdown" 
+          role="button" 
+          data-bs-toggle="dropdown"
             aria-expanded="false">
+
             <i class="bi bi-person-fill"></i>
+
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -271,10 +265,8 @@
                         
                           <td>
                             <a type="button" 
-                            class="btn btn-primary" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#staticBackdrop"
-                            onClick="cargarDatos();">
+                            class="btn btn-primary"                           
+                            href="editar.php?codigo=<?php echo $dato->id ?>">
 
                               <i class="bi bi-pencil-square"></i>
 
@@ -521,16 +513,7 @@
     </div>
 
   </main>
-  <!-- CRUD -->  
+  <!-- CRUD --> 
 
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-    crossorigin="anonymous"></script>
+  <?php include 'template/footerHome.php' ?>
 
-  <!-- Scripts-->
-  <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="funciones/funciones-home.js"></script>
-</body>
-
-</html>

@@ -12,7 +12,7 @@ var direccion = document.getElementById("txtDireccion");
 
 /* *** FUNCIONES ***  */ 
 
-function cargarDatos(){    
+function cargarDatos(){     
 
     //cargo el elemento con el valor que esta en un input hidden
     nombre.value = document.getElementById("dato_nombre").value;
