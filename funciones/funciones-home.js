@@ -42,7 +42,7 @@ function clearDatos(){
 
 function vista_form(){//es para la visibilidad de la contraseña
 
-    let pass = document.getElementById('contrasena');
+    let pass = document.getElementById('txtContrasena');
     let ver = document.getElementById('ver');
     let ocultar = document.getElementById('ocultar');
 

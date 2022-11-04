@@ -184,6 +184,23 @@
                   }
 
                 ?>
+                
+                <?php
+
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
+
+                ?>
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Error!</strong> Vuelve a intentar.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <?php
+
+                  }
+
+                ?>
 
               <!-- ALERTA -->
 
@@ -223,40 +240,7 @@
 
                         ?>                         
 
-                        <tr>
-                          <!-- input hidden para datos -->
-                          <input type="hidden"
-                          id="dato_id"
-                          value="<?php echo $dato->id; ?>">
-
-                          <input type="hidden"
-                          id="dato_nombre"
-                          value="<?php echo $dato->nombre; ?>">
-
-                          <input type="hidden"
-                          id="dato_apellido"
-                          value="<?php echo $dato->apellido; ?>">
-
-                          <input type="hidden"
-                          id="dato_dni"
-                          value="<?php echo $dato->dni; ?>">
-
-                          <input type="hidden"
-                          id="dato_telefono"
-                          value="<?php echo $dato->telefono; ?>">
-
-                          <input type="hidden"
-                          id="dato_email"
-                          value="<?php echo $dato->email; ?>">
-
-                          <input type="hidden"
-                          id="dato_direccion"
-                          value="<?php echo $dato->direccion; ?>">
-
-                          <input type="hidden"
-                          id="dato_rol"
-                          value="<?php echo $dato->rol; ?>">
-                          <!-- input hidden para datos -->
+                        <tr>                          
 
                           <td scope="row" ><?php echo $dato->nombre; ?></td>
                           <td><?php echo $dato->apellido; ?></td>
@@ -266,7 +250,7 @@
                           <td>
                             <a type="button" 
                             class="btn btn-primary"                           
-                            href="editar.php?codigo=<?php echo $dato->id ?>">
+                            href="editar.php?id=<?php echo $dato->id; ?>">
 
                               <i class="bi bi-pencil-square"></i>
 
