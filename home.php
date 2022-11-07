@@ -166,29 +166,67 @@
 
             <div class="card mx-5">
 
-              <!-- ALERTA -->
+              <!-- ALERTAS -->
 
                 <?php
-
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'registrado'){
-
                 ?>
 
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
+
                   <strong>Registrado!</strong> Se agregaron los datos.
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  
+                  <button type="button" 
+                  class="btn-close" 
+                  data-bs-dismiss="alert" 
+                  aria-label="Close"></button>
+
                 </div>
 
                 <?php
-
                   }
+                ?>
 
+                <?php
+                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado'){
+                ?>
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                  <strong>Editado!</strong> Los datos fueron actualizados.
+
+                  <button type="button" 
+                  class="btn-close" 
+                  data-bs-dismiss="alert" 
+                  aria-label="Close"></button>
+
+                </div>
+
+                <?php
+                }
+                ?>
+
+                <?php
+                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado'){
+                ?>
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                  <strong>Eliminado!</strong> Los datos fueron borrados.
+
+                  <button type="button" 
+                  class="btn-close" 
+                  data-bs-dismiss="alert" 
+                  aria-label="Close"></button>
+
+                </div>
+
+                <?php
+                }
                 ?>
                 
                 <?php
-
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
-
                 ?>
 
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -197,12 +235,23 @@
                 </div>
 
                 <?php
-
                   }
-
                 ?>
 
-              <!-- ALERTA -->
+                <?php
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noBorrar'){
+                ?>
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>No se puede eliminar!</strong> Tiene que haber al menos 1 administrador.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <?php
+                  }
+                ?>
+
+              <!-- ALERTAS -->
 
                 <div class="card-header">                  
                   Lista de personas
@@ -256,8 +305,10 @@
 
                             </a>                            
                           
-                            <a href="#"
-                            class="btn btn-danger">
+                            <a type="button" 
+                            class="btn btn-danger"
+                            href="eliminar.php?id=<?php echo $dato->id; ?>"
+                            onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
 
                             <i class="bi bi-trash3-fill"></i>
 

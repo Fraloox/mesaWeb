@@ -1,3 +1,3 @@
 <?php
-    $conexion=mysqli_connect("localhost","root","","mesaweb");
+    $mysqli= new mysqli("localhost","root","","mesaweb");
 ?>

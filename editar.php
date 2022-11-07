@@ -17,7 +17,16 @@ $sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = ?;");
 
 $sentencia->execute([$id]);
 
-$persona = $sentencia->fetch(PDO::FETCH_OBJ);
+if ($sentencia === TRUE){
+
+    $persona = $sentencia->fetch(PDO::FETCH_OBJ);
+
+}else{
+
+    header('Location: home.php?mensaje=error');
+
+}
+
 
 ?>
 
@@ -45,7 +54,13 @@ $persona = $sentencia->fetch(PDO::FETCH_OBJ);
                     Editar datos:
                 </div>
 
+                <!-- FORMULARIO -->
+
                 <form class="p-4" method="POST" action="editarPorceso.php">
+
+                    <input type="hidden" 
+                    name="id"
+                    value="<?php echo $persona->id; ?>">
 
                     <div class="modal-body">
 
@@ -107,11 +122,10 @@ $persona = $sentencia->fetch(PDO::FETCH_OBJ);
                                     id="txtDni" 
                                     name="txtDni"
                                     placeholder= "DNI" 
-                                    value="<?php echo $persona->dni; ?>"
-                                    autofocus
+                                    value="<?php echo $persona->dni; ?>"                                   
                                     pattern="[0-9]+" 
-                                    maxlength="8" minlenght="8"
-                                    required>
+                                    aria-label="Disabled input example" 
+                                    disabled>
 
                                 </div>                        
 
@@ -207,6 +221,8 @@ $persona = $sentencia->fetch(PDO::FETCH_OBJ);
                   
                     </div>
                 </form>
+
+                <!-- FORMULARIO -->
 
             </div>
 
