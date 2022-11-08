@@ -15,9 +15,9 @@ $id = $_GET['id'];
 
 $sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = ?;");
 
-$sentencia->execute([$id]);
+$resultado = $sentencia->execute([$id]);
 
-if ($sentencia === TRUE){
+if ($resultado === TRUE){
 
     $persona = $sentencia->fetch(PDO::FETCH_OBJ);
 

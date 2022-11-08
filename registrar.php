@@ -1,8 +1,8 @@
-<?php
-    
-    print_r($_POST);
+<?php   
 
     include_once 'conexion.php';
+    include 'db.php';
+
 
     $nombre = $_POST["txtNombre"];
     $apellido = $_POST["txtApellido"];
@@ -13,20 +13,35 @@
     $rol = $_POST["sctRol"];
     $direccion = $_POST["txtDireccion"];
 
-    $sentencia = $bd->prepare(
-        "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, contrasena, rol, direccion)
-        VALUES (?,?,?,?,?,?,?,?);");
-    
-    $resultado = $sentencia->execute([$nombre,$apellido,$telefono,$dni,$email, $contrasena,$rol,$direccion]);
+    $sql = "SELECT COUNT(*) total FROM usuarios WHERE dni = '$dni';";
+    $resultado = $mysqli->query($sql);
+    $fila = $resultado->fetch_assoc();
 
+    if($fila['total'] == 1){
 
-    if($resultado === TRUE){
-
-        header('Location: home.php?mensaje=registrado');
+        header ('Location: home.php?mensaje=usuarioRepetido');
 
     }else{
-        include("home.php");
-        echo "<script> mostrarError('Error al dar de alta'); </script>";
+
+        $sentencia = $bd->prepare(
+            "INSERT INTO usuarios(nombre, apellido, telefono, dni, email, contrasena, rol, direccion)
+            VALUES (?,?,?,?,?,?,?,?);");
+        
+        $resultado = $sentencia->execute([$nombre,$apellido,$telefono,$dni,$email, $contrasena,$rol,$direccion]);
+    
+    
+        if($resultado === TRUE){
+    
+            header('Location: home.php?mensaje=registrado');
+    
+        }else{
+
+            include("home.php");
+            echo "<script> mostrarError('Error al dar de alta'); </script>";
+    
+        }
 
     }
+
+    
 ?>

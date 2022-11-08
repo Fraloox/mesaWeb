@@ -12,28 +12,35 @@ $id = $_POST['id'];
 $nombre = $_POST['txtNombre'];
 $apellido = $_POST['txtApellido'];
 $telefono = $_POST['txtTelefono'];
+$dni = $_POST['txtDni'];
 $email = $_POST['txtEmail'];
 $contrasena = $_POST['txtContrasena'];
 $direccion = $_POST['txtDireccion'];
 $rol = $_POST['sctRol'];
 
+
+
 $sentencia = $bd->prepare(
     "UPDATE usuarios 
     SET nombre = ?, apellido = ?, telefono = ?, email = ?, contrasena = ?, direccion = ?, rol = ? 
     WHERE id = ?;" );
-
+    
 $resultado = $sentencia->execute(
     [$nombre, $apellido, $telefono, $email, $contrasena, $direccion, $rol, $id]);
-
-if ($resultado === TRUE) {
     
+if ($resultado === TRUE) {
+        
     header('Location: home.php?mensaje=editado');
-
+    
 } else {
-
+    
     header('Location: home.php?mensaje=error');
     exit();
-
+    
 }
+
+
+
+
 
 ?>

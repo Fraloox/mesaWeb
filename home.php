@@ -3,7 +3,22 @@
   $sentencia = $bd-> query("SELECT * FROM usuarios");
   $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
-  include 'template/headerHome.php'
+  include 'template/headerHome.php';
+
+  if(isset($_GET['roles']) and $_GET['roles'] == 'administrador'){
+
+    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 1");
+    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+  }elseif(isset($_GET['roles']) and $_GET['roles'] == 'empleado'){
+
+    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 2");
+    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+  }
+
+
+  
   
 ?>
 
@@ -244,6 +259,19 @@
 
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <strong>No se puede eliminar!</strong> Tiene que haber al menos 1 administrador.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <?php
+                  }
+                ?>
+
+                <?php
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'usuarioRepetido'){
+                ?>
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Usuario repetido!</strong> El DNI de este usuario ya esta registrado.
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
