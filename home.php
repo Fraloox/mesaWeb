@@ -57,15 +57,24 @@
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-            <li><a class="dropdown-item" href="#">Información</a></li>            
+            <li>
+              <a class="dropdown-item" 
+                href="#">
+                Información
+              </a>
+            </li>            
 
             <li>
               <hr class="dropdown-divider" />
             </li>
 
             <li>            
-              <a class="dropdown-item text-danger" href="#">Salir</a>            
+              <a class="dropdown-item text-danger" 
+                href="index.php">
+                  Salir
+              </a>            
             </li>
+
           </ul>
 
         </li>
@@ -92,8 +101,8 @@
             <li>
 
               <a class="nav-link px-3 sidebar-link" 
-              data-bs-toggle="collapse" href="#collapseExample" 
-              role="button" aria-expanded="false" aria-controls="collapseExample">
+                data-bs-toggle="collapse" href="#collapseExample" 
+                role="button" aria-expanded="false" aria-controls="collapseExample">
 
                 <span class="me-2">
                   <i class="bi bi-person-rolodex"></i>
@@ -117,7 +126,7 @@
 
                     <li>
 
-                      <a href="#" class="nav-link px-3">
+                      <a href="home.php?roles=empleado" class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-file-earmark-person"></i>
                         </span>
@@ -130,7 +139,7 @@
                     
                     <li>
 
-                      <a href="#" class="nav-link px-3">
+                      <a href="home.php?roles=administrador" class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-person-circle"></i>
                         </span>
@@ -147,7 +156,8 @@
 
               </div>
 
-              <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <a class="nav-link px-3 sidebar-link"               
+              role="button">
                 <span class="me-2">
                   <i class="bi bi-box-seam"></i>
                 </span>
@@ -281,16 +291,41 @@
 
               <!-- ALERTAS -->
 
-                <div class="card-header">                  
-                  Lista de personas
+                <div class="card-header">
+                  
+                  <?php 
+                  
+                  if(isset($_GET['roles']) and $_GET['roles'] == 'administrador'){
+
+                    ?> Lista de administradores <?php
+                
+                  }elseif(isset($_GET['roles']) and $_GET['roles'] == 'empleado'){
+                
+                    ?> Lista de empleados <?php
+                
+                  }else{
+
+                    ?> Lista del personal <?php
+
+                  }
+                  
+                  ?>
+                  
+                  <a href="home.php"
+                  class="btn btn-light mx-0 px-2 py-1 "                  
+                  onClick="clearDatos();">
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                  </a>
 
                   <a href="#"
-                  class="btn btn-success"
+                  class="btn btn-light text-success mx-0 px-2 py-1"
                   data-bs-toggle="modal" 
                   data-bs-target="#staticBackdrop"
                   onClick="clearDatos();">
 
-                  <i class="bi bi-person-plus-fill"></i>
+                    <i class="bi bi-person-plus-fill"></i>
 
                   </a>
                 </div>
@@ -304,7 +339,24 @@
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
                           <th scope="col">DNI</th>
-                          <th scope="col">Teléfono</th>
+
+                          <?php                           
+                          
+                          if(isset($_GET['roles']) 
+                            and $_GET['roles'] == 'administrador'  
+                            || $_GET['roles'] == 'empleado'){
+
+                            ?> <th scope="col">Teléfono</th> <?php
+                        
+                          }else{
+                        
+                            ?> <th scope="col">Rol</th> <?php
+
+                          }
+
+                          ?>
+                          
+                          
                           <th scope="col">Opciones<th>
                         </tr>
                       </thead>
@@ -322,7 +374,31 @@
                           <td scope="row" ><?php echo $dato->nombre; ?></td>
                           <td><?php echo $dato->apellido; ?></td>
                           <td><?php echo $dato->dni; ?></td>
-                          <td><?php echo $dato->telefono; ?> </td>
+
+                          <?php
+                          
+                          if(isset($_GET['roles']) 
+                            and $_GET['roles'] == 'administrador'  
+                            || $_GET['roles'] == 'empleado'){
+
+                            ?> <td> <?php echo $dato->telefono; ?> </td> <?php
+                      
+                          }else{
+                      
+                            if( $dato->rol == 1){
+
+                              ?> <td> Administrador </td> <?php
+
+                            }else{
+
+                              ?> <td> Empleado </td> <?php
+
+                            }
+
+                          }
+
+                          ?>
+                          
                         
                           <td>
                             <a type="button" 

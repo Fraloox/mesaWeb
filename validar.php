@@ -10,7 +10,7 @@
     
     $consulta="SELECT*FROM usuarios where dni='$dni'";
     
-    $resultado=mysqli_query($conexion, $consulta);
+    $resultado=mysqli_query($mysqli, $consulta);
 
     $filas=mysqli_num_rows($resultado);
 
@@ -21,7 +21,7 @@
 
         $consulta="SELECT*FROM usuarios where dni='$dni' and contrasena='$contrasena'";
         
-        $resultado=mysqli_query($conexion, $consulta);
+        $resultado=mysqli_query($mysqli, $consulta);
 
         $filas=mysqli_num_rows($resultado);
 
