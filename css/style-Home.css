@@ -69,3 +69,7 @@ main{
     margin-bottom: 16px;
     display: none;    
 }
+
+.pointer{
+    cursor: pointer;
+}

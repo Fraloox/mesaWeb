@@ -1,6 +1,6 @@
 <?php
-    $dni=$_POST['dni'];
-    $contrasena=$_POST['contrasena'];    
+    $dni=$_POST['txtDni'];
+    $contrasena=$_POST['txtContrasena'];    
 
     
     session_start();
@@ -29,13 +29,14 @@
             header("location:home.php");
         }else{          
             
-            include("index.php");
-            echo "<script> mostrarError('Contraseña Incorrecta'); </script>";
+            header('Location: index.php?mensaje=errorContraseña');
+            exit();
+            
         }
     }else{
         
-        include("index.php");
-        echo "<script> mostrarError('No se encontró al usuario'); </script>";
+        header('Location: index.php?mensaje=noUsuario');
+        exit();
 
     }    
     

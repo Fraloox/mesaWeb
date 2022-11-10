@@ -210,9 +210,7 @@
 
                 <?php
                   }
-                ?>
-
-                <?php
+                
                 if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado'){
                 ?>
 
@@ -229,9 +227,7 @@
 
                 <?php
                 }
-                ?>
-
-                <?php
+              
                 if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado'){
                 ?>
 
@@ -248,9 +244,7 @@
 
                 <?php
                 }
-                ?>
-                
-                <?php
+              
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
                 ?>
 
@@ -261,9 +255,7 @@
 
                 <?php
                   }
-                ?>
-
-                <?php
+            
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noBorrar'){
                 ?>
 
@@ -274,9 +266,7 @@
 
                 <?php
                   }
-                ?>
-
-                <?php
+             
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'usuarioRepetido'){
                 ?>
 
@@ -460,7 +450,7 @@
 
                   <h5 class="modal-title"
                   id="staticBackdropLabel">
-                      Edición de datos
+                      Carga de datos
                   </h5>
 
                   <button type="button" 
@@ -493,6 +483,10 @@
                           autofocus
                           maxlength="20" minlenght="3"
                           required>
+
+                          <div class= "invalid-feedback">
+                            Complete el campo
+                          </div>
                         
                         </div>
 
@@ -507,6 +501,10 @@
                           autofocus
                           maxlength="20" minlenght="3"
                           required>
+
+                          <div class= "invalid-feedback">
+                            Complete el campo
+                          </div>
                         
                         </div>
 
@@ -527,6 +525,10 @@
                             maxlength="10" minlenght="10"
                             required>
 
+                            <div class= "invalid-feedback">
+                              Complete el campo
+                            </div>
+
                         </div>
 
                         <div class="col-md-6">
@@ -541,6 +543,10 @@
                             pattern="[0-9]+" 
                             maxlength="8" minlenght="8"
                             required>
+
+                            <div class= "invalid-feedback">
+                              Complete el campo
+                            </div>
 
                         </div>                        
 
@@ -560,9 +566,13 @@
                             maxlength="30" minlenght="3"
                             required>
 
+                            <div class= "invalid-feedback">
+                              Complete el campo
+                            </div>
+
                         </div>
                         
-                        <div class="col-md-6 input-group w-50 h-100">
+                        <div class="col-md-6 input-group w-50 h-100 pointer">
 
                           <input type="password"
                             class="form-control" 
@@ -576,7 +586,10 @@
                               <i class="bi bi-eye" id="ver"></i>
                               <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
                             </span>
-                                                                          
+
+                            <div class= "invalid-feedback">
+                              Complete el campo
+                            </div>                                                                          
 
                         </div>                                            
 
@@ -596,6 +609,10 @@
                             maxlength="100" minlenght="10"
                             required>
 
+                            <div class= "invalid-feedback">
+                              Complete el campo
+                            </div>
+
                         </div>
 
                         <div class="col-md-5">
@@ -611,6 +628,10 @@
                             <option value="2">Empleado</option> 
 
                           </select>
+
+                          <div class= "invalid-feedback">
+                            Complete el campo
+                          </div>
 
                         </div>
 

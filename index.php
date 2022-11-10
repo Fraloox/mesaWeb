@@ -6,7 +6,8 @@
     <title>Login</title>     
 
     <!-- Bootstrap 5 CSS-->
-    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet" />
 
     <!-- CSS -->
     <link href="css/style-Login.css" rel="stylesheet">
@@ -34,15 +35,16 @@
 
                 <form action="validar.php" method="post" class="needs-validation mb-4">
 
-                  <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->
-                    <label for="dni" class="form-label">DNI</label>
+                  <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->                    
 
                     <input type="text" 
                       class="form-control"
-                      name="dni" 
-                      id="dni" 
+                      name="txtDni"
+                      placeholder="DNI" 
+                      id="txtDni" 
                       pattern="[0-9]+" 
                       maxlength="8" minlenght="8"
+                      onkeyup="this.value=Numeros(this.value)"
                       required>
 
                     <div class= "invalid-feedback">
@@ -50,32 +52,55 @@
                     </div>
                   </div>
 
-                  <div class="mb-4"> <!-- ESTE ES EL IMPUT CONTRASEÑA -->                  
-                    <label for="password" class="form-label">Contraseña</label>
+                  <div class="mb-4 input-group w-100"> <!-- ESTE ES EL IMPUT CONTRASEÑA -->                  
 
                     <input type="password"
                     class="form-control" 
-                    name="contrasena" 
-                    id="contrasena"
+                    name="txtContrasena"
+                    placeholder="Contraseña" 
+                    id="txtContrasena"
                     maxlength="20" minlenght="5"
-                    required>
+                    required>                  
+
+                    <span class="input-group-text pointer" onclick="vista_form();">
+                      <i class="bi bi-eye" id="ver"></i>
+                      <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
+                    </span>
 
                     <div class= "invalid-feedback">
                       Complete el campo
                     </div>
-                  </div>
-                  <!-- <div class="mb-4 form-check">
-                    <input type="checkbox" name="connected" class="form-check-input" id="">
-                    <label for="connected" class="form-check-label">Mantenerme conectado</label>
-                  </div> -->
-                  
+                  </div>                  
 
-                  <!-- <div class="alert alert-danger text-center" >
-                      La contraseña es incorrecta
-                  </div> -->
-                  <div id="error-alert"> <!-- Esta es la alerta de error -->
-                    Mensaje de error
-                  </div>
+                  <?php 
+
+                    if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'errorContraseña'){
+
+                  ?>
+
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Ups!</strong> La contraseña no es la correcta.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+
+                  <?php
+
+                    }                   
+
+                    if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noUsuario'){
+
+                  ?>
+
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Ups!</strong> Este DNI no esta registrado.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+
+                  <?php
+
+                    }
+
+                  ?> 
 
                   <div class="d-grid" > <!-- Botón de iniciar sesion -->
                     <button type="submit" 
@@ -133,7 +158,7 @@
 
     <!-- Scripts-->
     <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="funciones/funciones-login.js"> </script>
+    <script src="funciones/funciones-index.js"></script>  
     
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>  
