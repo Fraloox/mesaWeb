@@ -6,7 +6,9 @@
     session_start();
     $_SESSION['dni']=$dni;
     
+    
     include('db.php');
+    
     
     $consulta="SELECT*FROM usuarios where dni='$dni'";
     
@@ -26,7 +28,9 @@
         $filas=mysqli_num_rows($resultado);
 
         if($filas){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
-            header("location:home.php");
+
+            header('location: home.php?id='.$_POST[$dni]);            
+
         }else{          
             
             header('Location: index.php?mensaje=errorContraseña');
