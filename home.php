@@ -17,7 +17,7 @@
 
   }
 
-  echo $_POST['id'];
+  $dniLog = $_GET["dni"];
   
   
 ?>
@@ -42,6 +42,12 @@
       <a class="navbar-brand fw-bold text-uppercase me-auto" href="home.php">C.P.C.®</a>
 
       <ul class="navbar-nav ">
+
+        <li class="nav-item text-white">
+
+          <?php echo $dniLog ?>
+        
+        </li>
 
         <li class="nav-item dropdown">
 
@@ -301,7 +307,7 @@
                   
                   ?>
                   
-                  <a href="home.php"
+                  <a href="home.php?dni=<?php echo $dniLog ?>"
                   class="btn btn-light mx-0 px-2 py-1 "                  
                   onClick="clearDatos();">
 

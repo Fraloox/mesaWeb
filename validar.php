@@ -29,7 +29,7 @@
 
         if($filas){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
 
-            header('location: home.php?id='.$_POST[$dni]);            
+            header('Location: home.php?dni=' .$dni);            
 
         }else{          
             
