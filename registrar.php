@@ -3,6 +3,9 @@
     include_once 'conexion.php';
     include 'db.php';
 
+    $userDni = $_GET['userDni'];
+    $userRol = $_GET['userRol'];
+
 
     $nombre = $_POST["txtNombre"];
     $apellido = $_POST["txtApellido"];
@@ -19,7 +22,7 @@
 
     if($fila['total'] == 1){
 
-        header ('Location: home.php?mensaje=usuarioRepetido');
+        header ('Location: home.php?mensaje=usuarioRepetido&userDni=' .$userDni. '&userRol=' .$userRol);
 
     }else{
 
@@ -32,12 +35,13 @@
     
         if($resultado === TRUE){
     
-            header('Location: home.php?mensaje=registrado');
-    
+            header('Location: home.php?mensaje=registrado&userDni=' .$userDni. '&userRol=' .$userRol);
+            exit();
+
         }else{
 
-            include("home.php");
-            echo "<script> mostrarError('Error al dar de alta'); </script>";
+            header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
+            exit();
     
         }
 

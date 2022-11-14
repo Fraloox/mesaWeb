@@ -1,7 +1,10 @@
 <?php
 
+$userDni = $_GET['userDni'];
+$userRol = $_GET['userRol'];
+
 if(!isset($_GET['id'])){
-    header ('Location: home.php?mensaje=error');
+    header ('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
     exit();
 }
 
@@ -21,24 +24,18 @@ if ($fila['total'] > 1){
     
     if ($resultado === TRUE) {
     
-        header ('Location: home.php?mensaje=eliminado');
+        header ('Location: home.php?mensaje=eliminado&userDni=' .$userDni. '&userRol=' .$userRol);
         
     } else {
         
-        header ('Location: home.php?mensaje=error');
+        header ('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
     
     }
 
 }else{
 
-    header ('Location: home.php?mensaje=noBorrar');
+    header ('Location: home.php?mensaje=noBorrar&userDni=' .$userDni. '&userRol=' .$userRol);
 
 }
-
-
-
-
-
-
 
 ?>

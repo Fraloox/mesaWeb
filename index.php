@@ -70,7 +70,9 @@
                     <div class= "invalid-feedback">
                       Complete el campo
                     </div>
-                  </div>                  
+                  </div>  
+                  
+                  <!-- ALERTAS -->
 
                   <?php 
 
@@ -98,9 +100,24 @@
 
                   <?php
 
-                    }
+                    }                  
 
-                  ?> 
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
+
+                  ?>
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>Error!</strong> Vuelve a intentar.
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                  <?php
+
+                  }                   
+
+                  ?>
+
+                  <!-- ALERTAS -->
 
                   <div class="d-grid" > <!-- Botón de iniciar sesion -->
                     <button type="submit" 

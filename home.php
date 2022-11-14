@@ -17,7 +17,8 @@
 
   }
 
-  $dniLog = $_GET["dni"];
+  $userDni = $_GET["userDni"];
+  $userRol = $_GET["userRol"];
   
   
 ?>
@@ -39,15 +40,14 @@
       </button>
       <!--offcanvas trigger-->
 
-      <a class="navbar-brand fw-bold text-uppercase me-auto" href="home.php">C.P.C.®</a>
+      <a class="navbar-brand fw-bold text-uppercase me-auto" 
+      href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"> <!-- Direccion -->
 
-      <ul class="navbar-nav ">
+        C.P.C.®
 
-        <li class="nav-item text-white">
+      </a>
 
-          <?php echo $dniLog ?>
-        
-        </li>
+      <ul class="navbar-nav ">        
 
         <li class="nav-item dropdown">
 
@@ -61,7 +61,8 @@
 
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-end" 
+          aria-labelledby="navbarDropdown">
 
             <li>
               <a class="dropdown-item" 
@@ -132,7 +133,8 @@
 
                     <li>
 
-                      <a href="home.php?roles=empleado" class="nav-link px-3">
+                      <a href="home.php?filtro=empleado&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"  
+                      class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-file-earmark-person"></i>
                         </span>
@@ -145,7 +147,8 @@
                     
                     <li>
 
-                      <a href="home.php?roles=administrador" class="nav-link px-3">
+                      <a href="home.php?filtro=administrador&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>" 
+                      class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-person-circle"></i>
                         </span>
@@ -291,11 +294,11 @@
                   
                   <?php 
                   
-                  if(isset($_GET['roles']) and $_GET['roles'] == 'administrador'){
+                  if(isset($_GET['filtro']) and $_GET['filtro'] == 'administrador'){
 
                     ?> Lista de administradores <?php
                 
-                  }elseif(isset($_GET['roles']) and $_GET['roles'] == 'empleado'){
+                  }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 'empleado'){
                 
                     ?> Lista de empleados <?php
                 
@@ -307,7 +310,7 @@
                   
                   ?>
                   
-                  <a href="home.php?dni=<?php echo $dniLog ?>"
+                  <a href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"
                   class="btn btn-light mx-0 px-2 py-1 "                  
                   onClick="clearDatos();">
 
@@ -338,9 +341,9 @@
 
                           <?php                           
                           
-                          if(isset($_GET['roles']) 
-                            and $_GET['roles'] == 'administrador'  
-                            || $_GET['roles'] == 'empleado'){
+                          if(isset($_GET['filtro']) 
+                            and $_GET['filtro'] == 'administrador'  
+                            || $_GET['filtro'] == 'empleado'){
 
                             ?> <th scope="col">Teléfono</th> <?php
                         
@@ -373,9 +376,9 @@
 
                           <?php
                           
-                          if(isset($_GET['roles']) 
-                            and $_GET['roles'] == 'administrador'  
-                            || $_GET['roles'] == 'empleado'){
+                          if(isset($_GET['filtro']) 
+                            and $_GET['filtro'] == 'administrador'  
+                            || $_GET['filtro'] == 'empleado'){
 
                             ?> <td> <?php echo $dato->telefono; ?> </td> <?php
                       
@@ -391,15 +394,21 @@
 
                             }
 
-                          }
+                          }                        
 
-                          ?>
-                          
+                          ?>                          
                         
                           <td>
+
+                            <?php
+                            
+                            if($userRol == '1'){ // *** IF ***
+
+                            ?>
+
                             <a type="button" 
                             class="btn btn-primary"                           
-                            href="editar.php?id=<?php echo $dato->id; ?>">
+                            href="editar.php?id=<?php echo $dato->id ?>&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
 
                               <i class="bi bi-pencil-square"></i>
 
@@ -407,15 +416,34 @@
                           
                             <a type="button" 
                             class="btn btn-danger"
-                            href="eliminar.php?id=<?php echo $dato->id; ?>"
+                            href="eliminar.php?id=<?php echo $dato->id ?>&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"
                             onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
 
                             <i class="bi bi-trash3-fill"></i>
 
                             </a>
                             
+                            <?php
+
+                            }else{ // *** ELSE ***
+
+                            ?>
+
+                            <a type="button" 
+                            class="btn btn-primary"                           
+                            href="editar.php?id=<?php echo $dato->id; ?>">
+
+                              <i class="bi bi-info-square"></i>
+
+                            </a> 
+
+                            <?php
+
+                            } // *** Fin del IF
+
+                            ?>
                         
-                          </td>
+                          </td>                          
 
                         </tr>
                         
@@ -469,7 +497,7 @@
 
                   <!-- FORMULARIO -->
 
-                <form action="registrar.php" 
+                <form action="registrar.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol?>" 
                 method="POST">
 
                   <div class="modal-body">

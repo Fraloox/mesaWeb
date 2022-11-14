@@ -3,9 +3,12 @@
 
 <?php 
 
+$userDni = $_GET['userDni'];
+$userRol = $_GET['userRol'];
+
 if(!isset($_GET['id'])){
 
-    header('Location: home.php?mensaje=error');
+    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
     exit();
 
 }
@@ -23,7 +26,7 @@ if ($resultado === TRUE){
 
 }else{
 
-    header('Location: home.php?mensaje=error');
+    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
 
 }
 
@@ -35,7 +38,10 @@ if ($resultado === TRUE){
 
 <div class="container-fluid">
 
-  <a class="navbar-brand fw-bold text-uppercase me-auto" href="home.php">C.P.C.®</a>  
+  <a class="navbar-brand fw-bold text-uppercase me-auto" 
+  href="home.php?dni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
+    C.P.C.®
+  </a>  
 
 </div>
 
@@ -56,7 +62,8 @@ if ($resultado === TRUE){
 
                 <!-- FORMULARIO -->
 
-                <form class="p-4" method="POST" action="editarPorceso.php">
+                <form class="p-4" method="POST" 
+                action="editarPorceso.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
 
                     <input type="hidden" 
                     name="id"
@@ -214,7 +221,9 @@ if ($resultado === TRUE){
 
                         <a type="button" 
                         class="btn btn-secondary mx-3" 
-                        href="home.php" >Cancelar</a>
+                        href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>" >
+                            Cancelar
+                        </a>
 
                         <button type="submit" 
                         class="btn btn-primary">Guardar</button>

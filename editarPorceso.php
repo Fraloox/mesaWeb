@@ -1,7 +1,10 @@
 <?php
 
+$userDni = $_GET['userDni'];
+$userRol = $_GET['userRol'];
+
 if(!isset($_POST['id'])){
-    header('Location: home.php?mensaje=error');
+    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
 }
 
 include 'conexion.php';
@@ -28,11 +31,11 @@ $resultado = $sentencia->execute(
     
 if ($resultado === TRUE) {
         
-    header('Location: home.php?mensaje=editado');
+    header('Location: home.php?mensaje=editado&userDni=' .$userDni. '&userRol=' .$userRol);
     
 } else {
     
-    header('Location: home.php?mensaje=error');
+    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
     exit();
     
 }

@@ -1,35 +1,34 @@
 <?php
-    $dni=$_POST['txtDni'];
-    $contrasena=$_POST['txtContrasena'];    
 
-    
-    session_start();
-    $_SESSION['dni']=$dni;
-    
-    
-    include('db.php');
-    
-    
-    $consulta="SELECT*FROM usuarios where dni='$dni'";
-    
-    $resultado=mysqli_query($mysqli, $consulta);
+if(!isset($_POST['txtDni'], $_POST['txtContrasena'])){
 
-    $filas=mysqli_num_rows($resultado);
+    header('Location: index.php?mensaje=error');
+    exit();
 
-    if($filas){ //Verifica si existe el usuario según el DNI
-        $resultado= null;
+}
 
-        $filas= null;
+include_once 'conexion.php';
 
-        $consulta="SELECT*FROM usuarios where dni='$dni' and contrasena='$contrasena'";
+$dni=$_POST['txtDni'];
+$contrasena=$_POST['txtContrasena'];   
+   
+$sentencia = $bd->prepare("SELECT * FROM usuarios WHERE dni = ?;");    
+$resultado = $sentencia->execute([$dni]);
+
+    if($resultado === TRUE){ //Verifica si existe el usuario según el DNI               
+
+        $resultado = null;
+
+        $sentencia= $bd->prepare("SELECT*FROM usuarios where dni=? and contrasena=?;");        
+        $resultado = $sentencia->execute([$dni, $contrasena]);
+
         
-        $resultado=mysqli_query($mysqli, $consulta);
 
-        $filas=mysqli_num_rows($resultado);
+        if($resultado === TRUE){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
 
-        if($filas){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
+            $user = $sentencia->fetch(PDO::FETCH_OBJ);
 
-            header('Location: home.php?dni=' .$dni);            
+            header('Location: home.php?userDni=' .$dni. '&userRol=' .$user->rol);            
 
         }else{          
             
@@ -43,8 +42,6 @@
         exit();
 
     }    
-    
-    mysqli_free_result($resultado);
-    mysqli_close($conexion);    
+  
 
 ?>
