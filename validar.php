@@ -19,10 +19,8 @@ $resultado = $sentencia->execute([$dni]);
 
         $resultado = null;
 
-        $sentencia= $bd->prepare("SELECT*FROM usuarios where dni=? and contrasena=?;");        
-        $resultado = $sentencia->execute([$dni, $contrasena]);
-
-        
+        $sentencia= $bd->prepare("SELECT * FROM usuarios where dni=? and contrasena=?;");        
+        $resultado = $sentencia->execute([$dni, $contrasena]);        
 
         if($resultado === TRUE){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
 
@@ -31,7 +29,7 @@ $resultado = $sentencia->execute([$dni]);
 
             include 'template/inputsDatos.php';
 
-            header('Location: home.php?userDni=' .$dni. '&userRol=' .$user->rol);            
+            //header('Location: home.php?userDni=' .$dni. '&userRol=' .$user->rol);            
 
         }else{          
             

@@ -17,8 +17,8 @@
 
   $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
-  $userDni = $_GET["userDni"];
-  $userRol = $_GET["userRol"];
+  $userDni = $_POST["userDni"];
+  $userRol = $_POST["userRol"];
   
   
 ?>
