@@ -1,21 +1,21 @@
 <?php
   include_once "conexion.php";
   $sentencia = $bd-> query("SELECT * FROM usuarios");
-  $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+  
 
   include 'template/headerHome.php';
 
   if(isset($_GET['roles']) and $_GET['roles'] == 'administrador'){
 
-    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 1");
-    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 1");    
 
   }elseif(isset($_GET['roles']) and $_GET['roles'] == 'empleado'){
 
-    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 2");
-    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 2");    
 
   }
+
+  $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
   $userDni = $_GET["userDni"];
   $userRol = $_GET["userRol"];

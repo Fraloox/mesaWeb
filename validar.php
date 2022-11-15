@@ -27,6 +27,9 @@ $resultado = $sentencia->execute([$dni]);
         if($resultado === TRUE){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
 
             $user = $sentencia->fetch(PDO::FETCH_OBJ);
+            $action = 'home.php';
+
+            include 'template/inputsDatos.php';
 
             header('Location: home.php?userDni=' .$dni. '&userRol=' .$user->rol);            
 
@@ -45,3 +48,4 @@ $resultado = $sentencia->execute([$dni]);
   
 
 ?>
+
