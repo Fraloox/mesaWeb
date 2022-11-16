@@ -33,7 +33,7 @@
 
                 <!-- LOGIN -->
 
-                <form action="validar.php" method="post" class="needs-validation mb-4">
+                <form action="validar.php" method="POST" class="needs-validation mb-4">
 
                   <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->                    
 

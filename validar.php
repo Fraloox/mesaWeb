@@ -1,46 +1,38 @@
 <?php
 
-if(!isset($_POST['txtDni'], $_POST['txtContrasena'])){
+$userDni = $_POST['txtDni'];
+$userPass = $_POST['txtContrasena']; 
 
-    header('Location: index.php?mensaje=error');
-    exit();
-
-}
-
-include_once 'conexion.php';
-
-$dni=$_POST['txtDni'];
-$contrasena=$_POST['txtContrasena'];   
+include_once 'conexion.php';  
    
 $sentencia = $bd->prepare("SELECT * FROM usuarios WHERE dni = ?;");    
-$resultado = $sentencia->execute([$dni]);
+$resultado = $sentencia->execute([$userDni]);
 
     if($resultado === TRUE){ //Verifica si existe el usuario según el DNI               
 
-        $resultado = null;
+        $user = $sentencia->fetch(PDO::FETCH_OBJ);  
+        
+        echo $user->contrasena;
 
-        $sentencia= $bd->prepare("SELECT * FROM usuarios where dni=? and contrasena=?;");        
-        $resultado = $sentencia->execute([$dni, $contrasena]);        
+        if($user->contrasena === $userPass){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
+            
+            $action = "home.php";
 
-        if($resultado === TRUE){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
-
-            $user = $sentencia->fetch(PDO::FETCH_OBJ);
-            $action = 'home.php';
-
-            include 'template/inputsDatos.php';
+            //include 'template/inputsDatos.php';
 
             //header('Location: home.php?userDni=' .$dni. '&userRol=' .$user->rol);            
 
         }else{          
             
-            header('Location: index.php?mensaje=errorContraseña');
-            exit();
+            //header('Location: index.php?mensaje=errorContraseña');
+            echo "Error de contraseña";
             
         }
+
     }else{
         
-        header('Location: index.php?mensaje=noUsuario');
-        exit();
+        //header('Location: index.php?mensaje=noUsuario');
+        echo "Error de DNI";        
 
     }    
   
