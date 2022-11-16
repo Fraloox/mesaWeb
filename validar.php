@@ -3,20 +3,19 @@
 $userDni = $_POST['txtDni'];
 $userPass = $_POST['txtContrasena']; 
 
-include_once 'conexion.php';  
+include 'conexion.php';  
    
-$sentencia = $bd->prepare("SELECT * FROM usuarios WHERE dni = ?;");    
+$sentencia = $bd->prepare("SELECT * FROM usuarios WHERE dni = ?;" );    
 $resultado = $sentencia->execute([$userDni]);
 
     if($resultado === TRUE){ //Verifica si existe el usuario según el DNI               
 
-        $user = $sentencia->fetch(PDO::FETCH_OBJ);  
-        
-        echo $user->contrasena;
+        $user = $sentencia->fetch(PDO::FETCH_OBJ);       
 
-        if($user->contrasena === $userPass){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
+        if($user->contrasena == $userPass){ //Verifico que la contraseña ingresada sea la misma que la del usuario ingresado
             
             $action = "home.php";
+            
 
             //include 'template/inputsDatos.php';
 
