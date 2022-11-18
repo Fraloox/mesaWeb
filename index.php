@@ -17,19 +17,29 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
 
   $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-  $mensaje = '';
+  $mensaje = ''; 
 
-  if (count($resultado) > 0 && password_verify($_POST['txtPass'], $resultado['contrasena'])){
+  if(!empty($resultado)){
 
-    $_SESSION['user_id'] = $resultado['id'];
+    if (count($resultado) > 0 && $_POST['txtPass'] == $resultado['contrasena']){
 
-    header('Location: home.php');
+      $_SESSION['user_id'] = $resultado['id'];
+  
+      header('Location: home.php');
+  
+    }else{
+  
+      $mensaje = 'Las credenciales no coinciden.';
+  
+    }  
 
   }else{
 
-    $mensaje = 'Las credenciales no coinciden.';
+    $mensaje = 'El usuario no fue encontrado';
 
   }
+
+    
 
 }
 
