@@ -35,7 +35,7 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
 
   }else{
 
-    $mensaje = 'El usuario no fue encontrado';
+    $mensaje = 'El usuario no fue encontrado.';
 
   }
 
