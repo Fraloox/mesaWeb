@@ -12,6 +12,7 @@
             array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES utf8")
         );
     } catch (Exeption $e) {
-        echo "Problema con la conexión: ".$e->getMessage();
+        die('Connected failed: ' .$e->getMessage());
+
     }
 ?>

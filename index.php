@@ -1,3 +1,41 @@
+<?php 
+
+session_start();
+
+include 'conexion.php';
+
+if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
+
+  $sentencia = $bd->prepare(
+    'SELECT id, dni, contrasena 
+    FROM usuarios
+    WHERE dni=:dni');
+
+  $sentencia->bindParam(':dni', $_POST['txtDni']);
+
+  $sentencia->execute();
+
+  $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+  $mensaje = '';
+
+  if (count($resultado) > 0 && password_verify($_POST['txtPass'], $resultado['contrasena'])){
+
+    $_SESSION['user_id'] = $resultado['id'];
+
+    header('Location: home.php');
+
+  }else{
+
+    $mensaje = 'Las credenciales no coinciden.';
+
+  }
+
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,7 +71,7 @@
 
                 <!-- LOGIN -->
 
-                <form action="validar.php" method="POST" class="needs-validation mb-4">
+                <form action="index.php" method="POST" class="needs-validation mb-4">
 
                   <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->                    
 
@@ -50,15 +88,16 @@
                     <div class= "invalid-feedback">
                       Complete el campo
                     </div>
+
                   </div>
 
                   <div class="mb-4 input-group w-100"> <!-- ESTE ES EL IMPUT CONTRASEÑA -->                  
 
                     <input type="password"
                     class="form-control" 
-                    name="txtContrasena"
+                    name="txtPass"
                     placeholder="Contraseña" 
-                    id="txtContrasena"
+                    id="txtPass"
                     maxlength="20" minlenght="5"
                     required>                  
 
@@ -70,37 +109,25 @@
                     <div class= "invalid-feedback">
                       Complete el campo
                     </div>
+
                   </div>  
                   
                   <!-- ALERTAS -->
 
                   <?php 
 
-                    if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'errorContraseña'){
+                    if(!empty($mensaje)){
 
                   ?>
 
                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Ups!</strong> La contraseña no es la correcta.
+                        <strong>Ups!</strong> <?php echo $mensaje ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
 
                   <?php
 
-                    }                   
-
-                    if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noUsuario'){
-
-                  ?>
-
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Ups!</strong> Este DNI no esta registrado.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-
-                  <?php
-
-                    }                  
+                    }                                                     
 
                   if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
 

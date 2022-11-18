@@ -1,6 +1,6 @@
 function vista_form(){//es para la visibilidad de la contraseña
 
-    let pass = document.getElementById('txtContrasena');
+    let pass = document.getElementById('txtPass');
     let ver = document.getElementById('ver');
     let ocultar = document.getElementById('ocultar');
 
