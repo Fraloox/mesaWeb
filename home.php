@@ -1,26 +1,57 @@
 <?php
+
+  session_start();
+
+          // *** USER LOGEADO ***
+
   include_once "conexion.php";
-  $sentencia = $bd-> query("SELECT * FROM usuarios");
-  
 
-  include 'template/headerHome.php';
+  if(isset($_SESSION['user_id'])){
 
-  if(isset($_GET['roles']) and $_GET['roles'] == 'administrador'){
+    $records = $bd->prepare(
+      'SELECT id, dni, rol
+      FROM usuarios
+      WHERE id = :id');    
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
 
-    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 1");    
+    $user = null;
 
-  }elseif(isset($_GET['roles']) and $_GET['roles'] == 'empleado'){
+    if(!empty($results)){
 
-    $sentencia = $bd-> query("SELECT * FROM usuarios WHERE rol = 2");    
+      $user = $results;
 
+    }
   }
 
-  $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+          // *** USER LOGEADO ***
 
-  $userDni = $_POST["userDni"];
-  $userRol = $_POST["userRol"];
+  if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
+
+    $sentencia = $bd->prepare(
+      "SELECT * FROM usuarios 
+      WHERE rol = :rol");    
+
+      $sentencia->bindParam(':rol', $_GET['filtro']);
+      
+      $sentencia->execute();
+
+      $personas = $sentencia->fetchAll();
+
+  }else{ //si no hay filtro, trae todos los usuarios
+ 
+    $sentencia = $bd->prepare("SELECT * FROM usuarios");
+
+    $sentencia->execute();
+
+    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+  } 
+
   
   
+  include 'template/headerHome.php';
 ?>
 
   <!-- NAVBAR -->
@@ -41,7 +72,7 @@
       <!--offcanvas trigger-->
 
       <a class="navbar-brand fw-bold text-uppercase me-auto" 
-      href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"> <!-- Direccion -->
+      href="home.php"> <!-- Direccion -->
 
         C.P.C.®
 
@@ -77,7 +108,7 @@
 
             <li>            
               <a class="dropdown-item text-danger" 
-                href="index.php">
+                href="logout.php">
                   Salir
               </a>            
             </li>
@@ -133,7 +164,7 @@
 
                     <li>
 
-                      <a href="home.php?filtro=empleado&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"  
+                      <a href="home.php?filtro=empleado"  
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-file-earmark-person"></i>
@@ -147,7 +178,7 @@
                     
                     <li>
 
-                      <a href="home.php?filtro=administrador&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>" 
+                      <a href="home.php?filtro=administrador" 
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-person-circle"></i>
@@ -310,13 +341,19 @@
                   
                   ?>
                   
-                  <a href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"
+                  <a href="home.php"
                   class="btn btn-light mx-0 px-2 py-1 "                  
                   onClick="clearDatos();">
 
                     <i class="bi bi-arrow-clockwise"></i>
 
                   </a>
+
+                  <?php
+
+                  if($user['rol'] == 1){
+
+                  ?>
 
                   <a href="#"
                   class="btn btn-light text-success mx-0 px-2 py-1"
@@ -327,6 +364,10 @@
                     <i class="bi bi-person-plus-fill"></i>
 
                   </a>
+
+                  <?php
+                  }
+                  ?>
                 </div>
 
                 <div class="p-4">
@@ -370,7 +411,7 @@
 
                         <tr>                          
 
-                          <td scope="row" ><?php echo $dato->nombre; ?></td>
+                          <td scope="row" ><?php echo $dato['nombre']; ?></td>
                           <td><?php echo $dato->apellido; ?></td>
                           <td><?php echo $dato->dni; ?></td>
 
@@ -402,13 +443,13 @@
 
                             <?php
                             
-                            if($userRol == '1'){ // *** IF ***
+                            if($user['rol'] == 1){ // *** IF ***
 
                             ?>
 
                             <a type="button" 
                             class="btn btn-primary"                           
-                            href="editar.php?id=<?php echo $dato->id ?>&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
+                            href="editar.php?id=<?php echo $dato->id ?>&tipo=edit">
 
                               <i class="bi bi-pencil-square"></i>
 
@@ -416,7 +457,7 @@
                           
                             <a type="button" 
                             class="btn btn-danger"
-                            href="eliminar.php?id=<?php echo $dato->id ?>&userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>"
+                            href="eliminar.php"
                             onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
 
                             <i class="bi bi-trash3-fill"></i>
@@ -431,7 +472,7 @@
 
                             <a type="button" 
                             class="btn btn-primary"                           
-                            href="editar.php?id=<?php echo $dato->id; ?>">
+                            href="editar.php?id=<?php echo $dato->id ?>&tipo=info">
 
                               <i class="bi bi-info-square"></i>
 
@@ -497,7 +538,7 @@
 
                   <!-- FORMULARIO -->
 
-                <form action="registrar.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol?>" 
+                <form action="registrar.php" 
                 method="POST">
 
                   <div class="modal-body">

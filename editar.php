@@ -3,12 +3,11 @@
 
 <?php 
 
-$userDni = $_GET['userDni'];
-$userRol = $_GET['userRol'];
+session_start();
 
-if(!isset($_GET['id'])){
+if(empty($_GET['id'])){
 
-    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
+    header('Location: home.php?mensaje=error');
     exit();
 
 }
@@ -16,17 +15,16 @@ if(!isset($_GET['id'])){
 include_once 'conexion.php';
 $id = $_GET['id'];
 
-$sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = ?;");
+$sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = :id");
+$sentencia->bindParam(':id', $id);
+$sentencia->execute();
+$results = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$resultado = $sentencia->execute([$id]);
+$persona = null;
 
-if ($resultado === TRUE){
+if(!empty($results)){
 
-    $persona = $sentencia->fetch(PDO::FETCH_OBJ);
-
-}else{
-
-    header('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
+    $persona = $results;
 
 }
 
@@ -39,7 +37,7 @@ if ($resultado === TRUE){
 <div class="container-fluid">
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php?dni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
+  href="home.php">
     C.P.C.®
   </a>  
 
@@ -63,11 +61,11 @@ if ($resultado === TRUE){
                 <!-- FORMULARIO -->
 
                 <form class="p-4" method="POST" 
-                action="editarPorceso.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>">
+                action="editarPorceso.php">
 
                     <input type="hidden" 
                     name="id"
-                    value="<?php echo $persona->id; ?>">
+                    value="<?php echo $persona['id']; ?>">
 
                     <div class="modal-body">
 
@@ -82,7 +80,7 @@ if ($resultado === TRUE){
                                     id="txtNombre" 
                                     name="txtNombre"
                                     placeholder= "Nombre"
-                                    value="<?php echo $persona->nombre; ?>"
+                                    value="<?php echo $persona['nombre']; ?>"
                                     autofocus
                                     maxlength="20" minlenght="3"
                                     required>
@@ -96,7 +94,7 @@ if ($resultado === TRUE){
                                     id="txtApellido" 
                                     name="txtApellido"
                                     placeholder= "Apellido"
-                                    value="<?php echo $persona->apellido; ?>"  
+                                    value="<?php echo $persona['apellido']; ?>"  
                                     autofocus
                                     maxlength="20" minlenght="3"
                                     required>
@@ -114,7 +112,7 @@ if ($resultado === TRUE){
                                     id="txtTelefono"
                                     name="txtTelefono"
                                     placeholder= "Teléfono" 
-                                    value="<?php echo $persona->telefono; ?>"
+                                    value="<?php echo $persona['telefono']; ?>"
                                     autofocus
                                     pattern="[0-9]+" 
                                     maxlength="10" minlenght="10"
@@ -129,7 +127,7 @@ if ($resultado === TRUE){
                                     id="txtDni" 
                                     name="txtDni"
                                     placeholder= "DNI" 
-                                    value="<?php echo $persona->dni; ?>"                                   
+                                    value="<?php echo $persona['dni']; ?>"                                   
                                     pattern="[0-9]+" 
                                     aria-label="Disabled input example" 
                                     disabled>
@@ -147,20 +145,20 @@ if ($resultado === TRUE){
                                     id="txtEmail" 
                                     name="txtEmail"
                                     placeholder="Email" 
-                                    value="<?php echo $persona->email; ?>"                            
+                                    value="<?php echo $persona['email']; ?>"                            
                                     autofocus
                                     maxlength="30" minlenght="3"
                                     required>
 
                                 </div>
                         
-                                <div class="col-md-6 input-group w-50 h-100">
+                                <div class="col-md-6 input-group w-50 h-100 pointer">
 
                                     <input type="password"
                                     class="form-control" 
                                     name="txtContrasena"
                                     placeholder="Contraseña"
-                                    value="<?php echo $persona->contrasena; ?>" 
+                                    value="<?php echo $persona['contrasena']; ?>" 
                                     id="txtContrasena"
                                     maxlength="20" minlenght="5"
                                     required>
@@ -184,7 +182,7 @@ if ($resultado === TRUE){
                                     id="txtDireccion"
                                     name="txtDireccion"
                                     placeholder="Dirección" 
-                                    value="<?php echo $persona->direccion; ?>"
+                                    value="<?php echo $persona['direccion']; ?>"
                                     autofocus
                                     maxlength="100" minlenght="10"
                                     required>
@@ -193,15 +191,22 @@ if ($resultado === TRUE){
 
                                 <div class="col-md-5">                                   
 
-                                    <select class="form-select mb-2" 
+                                    <select class="form-select mb-2 pointer" 
                                     aria-label="Default select example"
                                     id="sctRol"
                                     name="sctRol"
                                     required>
-
+                                        
                                         <option value="">Rol</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Empleado</option> 
+                                        <option value="1"
+                                        <?php if($persona['rol'] == 1){ echo 'selected';} ?>>
+                                        Administrador                                    
+                                        </option>
+
+                                        <option value="2"
+                                        <?php if($persona['rol'] == 2){ echo 'selected';} ?>>
+                                        Empleado
+                                        </option> 
 
                                     </select>
 
@@ -219,14 +224,42 @@ if ($resultado === TRUE){
                             Mensaje de error
                         </div>
 
+                        <?php
+
+                        if(isset($_GET['tipo']) and $_GET['tipo'] == 'edit'){
+
+                        ?>
+
+                        
                         <a type="button" 
                         class="btn btn-secondary mx-3" 
-                        href="home.php?userDni=<?php echo $userDni ?>&userRol=<?php echo $userRol ?>" >
+                        href="home.php">
                             Cancelar
                         </a>
 
                         <button type="submit" 
-                        class="btn btn-primary">Guardar</button>
+                        class="btn btn-primary">
+                            Guardar
+                        </button>
+
+                        <?php
+
+                        }else{
+                        
+                        ?>
+
+                        <a type="button" 
+                        class="btn btn-primary" 
+                        href="home.php" >
+                            Volver
+                        </a>   
+
+                        <?php
+
+                        }
+
+                        ?>
+
                   
                     </div>
                 </form>
