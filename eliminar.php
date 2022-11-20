@@ -1,41 +1,39 @@
 <?php
 
-$userDni = $_GET['userDni'];
-$userRol = $_GET['userRol'];
-
 if(!isset($_GET['id'])){
-    header ('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
+    header ('Location: home.php?mensaje=error');
     exit();
 }
 
 include 'db.php';
 include 'conexion.php';
 
-$sql = "SELECT COUNT(*) total FROM usuarios WHERE rol =1;";
-$resultado = $mysqli->query($sql);
-$fila = $resultado->fetch_assoc();
+if($_GET['rol'] == 1 ){
 
-if ($fila['total'] > 1){
-    
-    $id = $_GET['id'];
+    $sql = "SELECT COUNT(*) total FROM usuarios WHERE rol = 1;";
+    $resultado = $mysqli->query($sql);
+    $fila = $resultado->fetch_assoc();
 
-    $sentencia = $bd->prepare("DELETE FROM usuarios WHERE id = ?;" );
-    $resultado = $sentencia->execute([$id]);
-    
-    if ($resultado === TRUE) {
-    
-        header ('Location: home.php?mensaje=eliminado&userDni=' .$userDni. '&userRol=' .$userRol);
-        
-    } else {
-        
-        header ('Location: home.php?mensaje=error&userDni=' .$userDni. '&userRol=' .$userRol);
-    
+    if($fila['total'] == 1){
+
+        header ('Location: home.php?mensaje=noBorrar');
+
     }
+}
+    
+$id = $_GET['id'];
 
-}else{
-
-    header ('Location: home.php?mensaje=noBorrar&userDni=' .$userDni. '&userRol=' .$userRol);
-
+$sentencia = $bd->prepare("DELETE FROM usuarios WHERE id = ?;" );
+$resultado = $sentencia->execute([$id]);
+    
+if ($resultado === TRUE) {
+    
+    header ('Location: home.php?mensaje=eliminado');
+        
+} else {
+        
+    header ('Location: home.php?mensaje=error');
+    
 }
 
 ?>

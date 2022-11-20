@@ -37,7 +37,7 @@
       
       $sentencia->execute();
 
-      $personas = $sentencia->fetchAll();
+      $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
   }else{ //si no hay filtro, trae todos los usuarios
  
@@ -164,7 +164,7 @@
 
                     <li>
 
-                      <a href="home.php?filtro=empleado"  
+                      <a href="home.php?filtro=2"  
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-file-earmark-person"></i>
@@ -178,7 +178,7 @@
                     
                     <li>
 
-                      <a href="home.php?filtro=administrador" 
+                      <a href="home.php?filtro=1" 
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-person-circle"></i>
@@ -411,7 +411,7 @@
 
                         <tr>                          
 
-                          <td scope="row" ><?php echo $dato['nombre']; ?></td>
+                          <td scope="row" ><?php echo $dato->nombre; ?></td>
                           <td><?php echo $dato->apellido; ?></td>
                           <td><?php echo $dato->dni; ?></td>
 
@@ -457,7 +457,7 @@
                           
                             <a type="button" 
                             class="btn btn-danger"
-                            href="eliminar.php"
+                            href="eliminar.php?id=<?php echo $dato->id ?>&rol=<?php echo $dato->rol ?>"
                             onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
 
                             <i class="bi bi-trash3-fill"></i>
