@@ -10,17 +10,23 @@ include 'conexion.php';
 
 if($_GET['rol'] == 1 ){
 
-    $sql = "SELECT COUNT(*) total FROM usuarios WHERE rol = 1;";
-    $resultado = $mysqli->query($sql);
-    $fila = $resultado->fetch_assoc();
+    $sentencia = $bd->prepare('SELECT * FROM usuarios WHERE rol = :rol');
 
-    if($fila['total'] == 1){
+    $sentencia->bindParam(':rol', $_GET['rol']);
 
-        header ('Location: home.php?mensaje=noBorrar');
+    $sentencia->execute();
+
+    $fila = $sentencia->rowCount();
+
+    if($fila == 1){
+
+        header ('Location: home.php?mensaje=noAlterar');
+        exit();
 
     }
 }
-    
+   
+
 $id = $_GET['id'];
 
 $sentencia = $bd->prepare("DELETE FROM usuarios WHERE id = ?;" );
@@ -29,10 +35,12 @@ $resultado = $sentencia->execute([$id]);
 if ($resultado === TRUE) {
     
     header ('Location: home.php?mensaje=eliminado');
+    exit();
         
 } else {
         
     header ('Location: home.php?mensaje=error');
+    exit();
     
 }
 

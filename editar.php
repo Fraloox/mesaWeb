@@ -13,6 +13,7 @@ if(empty($_GET['id'])){
 }
 
 include_once 'conexion.php';
+
 $id = $_GET['id'];
 
 $sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = :id");
@@ -198,15 +199,8 @@ if(!empty($results)){
                                     required>
                                         
                                         <option value="">Rol</option>
-                                        <option value="1"
-                                        <?php if($persona['rol'] == 1){ echo 'selected';} ?>>
-                                        Administrador                                    
-                                        </option>
-
-                                        <option value="2"
-                                        <?php if($persona['rol'] == 2){ echo 'selected';} ?>>
-                                        Empleado
-                                        </option> 
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Empleado</option> 
 
                                     </select>
 
@@ -276,7 +270,7 @@ if(!empty($results)){
 
 <script>
 
-document.getElementById("sctRol").value = <?php echo $persona->rol; ?>;
+document.getElementById("sctRol").value = <?php echo $persona['rol']; ?>;
 
 </script>
 

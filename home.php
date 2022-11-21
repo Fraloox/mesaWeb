@@ -296,11 +296,11 @@
                 <?php
                   }
             
-                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noBorrar'){
+                  if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noAlterar'){
                 ?>
 
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>No se puede eliminar!</strong> Tiene que haber al menos 1 administrador.
+                  <strong>No se puede alterar!</strong> Tiene que haber al menos 1 administrador.
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
@@ -449,7 +449,7 @@
 
                             <a type="button" 
                             class="btn btn-primary"                           
-                            href="editar.php?id=<?php echo $dato->id ?>&tipo=edit">
+                            href="editar.php?id=<?php echo $dato->id ?>&rol=<?php echo $dato->rol ?>&tipo=edit">
 
                               <i class="bi bi-pencil-square"></i>
 

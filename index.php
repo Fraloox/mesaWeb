@@ -21,11 +21,13 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
 
   if(!empty($resultado)){
 
-    if (count($resultado) > 0 && $_POST['txtPass'] == $resultado['contrasena']){
+    if (count($resultado) > 0 
+    && $_POST['txtPass'] == $resultado['contrasena']){
 
       $_SESSION['user_id'] = $resultado['id'];
   
       header('Location: home.php');
+      exit();
   
     }else{
   

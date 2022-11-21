@@ -1,10 +1,31 @@
 <?php
 
 if(!isset($_POST['id'])){    
-    header('Location: home.php');
+    header('Location: home.php?mensaje=error');
+    exit();
 }
 
 include 'conexion.php';
+
+if($_POST['sctRol'] == 2 ){
+
+    $sentencia = $bd->prepare('SELECT * FROM usuarios WHERE rol = :rol');
+
+    $rolAdmin = 1;
+
+    $sentencia->bindParam(':rol', $rolAdmin);
+
+    $sentencia->execute();
+
+    $fila = $sentencia->rowCount();    
+
+    if($fila == 1){
+
+        header ('Location: home.php?mensaje=noAlterar');
+        exit();
+
+    }
+}
 
 $id = $_POST['id'];
 $nombre = $_POST['txtNombre'];
@@ -36,5 +57,6 @@ $sentencia->bindParam(':id', $id);
 $sentencia->execute();
 
 header('Location: home.php?mensaje=editado');
+exit();
 
 ?>
