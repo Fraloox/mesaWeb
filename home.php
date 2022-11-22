@@ -196,7 +196,8 @@
 
               </div>
 
-              <a class="nav-link px-3 sidebar-link"               
+              <a href = "home.php?filtro=clientes" 
+              class="nav-link px-3 sidebar-link"               
               role="button">
                 <span class="me-2">
                 <i class="bi bi-people"></i>
@@ -688,7 +689,14 @@
                             placeholder="Contraseña" 
                             id="txtContrasena"
                             maxlength="20" minlenght="5"
-                            required>
+                            <?php
+                              if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
+                                echo "aria-label='Disabled input example'";
+                              }else{
+                                echo "required";
+                              }
+                            ?>
+                            >
                           
                             <span class="input-group-text" onclick="vista_form();">
                               <i class="bi bi-eye" id="ver"></i>
