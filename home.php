@@ -199,12 +199,22 @@
               <a class="nav-link px-3 sidebar-link"               
               role="button">
                 <span class="me-2">
+                <i class="bi bi-people"></i>
+                </span>
+                <span>
+                  Clientes
+                </span>                
+              </a>
+
+              <a class="nav-link px-3 sidebar-link"               
+              role="button">
+                <span class="me-2">
                   <i class="bi bi-box-seam"></i>
                 </span>
                 <span>
                   Productos
                 </span>                
-              </a>
+              </a>              
 
             </li>
 
@@ -325,13 +335,17 @@
                   
                   <?php 
                   
-                  if(isset($_GET['filtro']) and $_GET['filtro'] == 'administrador'){
+                  if(isset($_GET['filtro']) and $_GET['filtro'] == 1){
 
                     ?> Lista de administradores <?php
                 
-                  }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 'empleado'){
+                  }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 2){
                 
                     ?> Lista de empleados <?php
+
+                  }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
+
+                    ?> Lista de clientes <?php
                 
                   }else{
 
@@ -383,8 +397,9 @@
                           <?php                           
                           
                           if(isset($_GET['filtro']) 
-                            and $_GET['filtro'] == 'administrador'  
-                            || $_GET['filtro'] == 'empleado'){
+                            and $_GET['filtro'] == 1  
+                            || $_GET['filtro'] == 2
+                            || $_GET['filtro'] == 'clientes'){
 
                             ?> <th scope="col">Teléfono</th> <?php
                         
@@ -418,8 +433,9 @@
                           <?php
                           
                           if(isset($_GET['filtro']) 
-                            and $_GET['filtro'] == 'administrador'  
-                            || $_GET['filtro'] == 'empleado'){
+                            and $_GET['filtro'] == 1  
+                            || $_GET['filtro'] == 2
+                            || $_GET['filtro'] == 'clientes'){
 
                             ?> <td> <?php echo $dato->telefono; ?> </td> <?php
                       
@@ -538,7 +554,24 @@
 
                   <!-- FORMULARIO -->
 
-                <form action="registrar.php" 
+                <form action=
+                
+                <?php
+                if (isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
+                
+                
+                  echo 'registrar-cliente.php';
+                
+                
+                }else{ 
+                
+
+                  echo 'registrar-personal.php';
+                
+                
+                }
+                ?>
+                
                 method="POST">
 
                   <div class="modal-body">
@@ -692,7 +725,7 @@
 
                         <div class="col-md-5">
 
-                          <select class="form-select mb-2" 
+                          <select class="form-select mb-2 pointer"
                           aria-label="Default select example"
                           id="sctRol"
                           name="sctRol"
