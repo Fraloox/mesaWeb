@@ -27,27 +27,30 @@
 
           // *** USER LOGEADO ***
 
-  if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
+  
+    //Si hay filtro, y es 'cliente', lo aplica:
 
+  if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){ 
+
+    $sentencia = $bd->prepare("SELECT * FROM clientes"); 
+
+  }elseif(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
+  
     $sentencia = $bd->prepare(
       "SELECT * FROM usuarios 
       WHERE rol = :rol");    
 
       $sentencia->bindParam(':rol', $_GET['filtro']);
-      
-      $sentencia->execute();
-
-      $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
-
+  
   }else{ //si no hay filtro, trae todos los usuarios
  
-    $sentencia = $bd->prepare("SELECT * FROM usuarios");
-
-    $sentencia->execute();
-
-    $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+    $sentencia = $bd->prepare("SELECT * FROM usuarios");   
 
   } 
+
+  $sentencia->execute();
+
+  $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
   
   
@@ -690,13 +693,17 @@
                             id="txtContrasena"
                             maxlength="20" minlenght="5"
                             <?php
+
                               if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-                                echo "aria-label='Disabled input example'";
+
+                                echo "disabled";
+
                               }else{
+
                                 echo "required";
+
                               }
-                            ?>
-                            >
+                            ?> >
                           
                             <span class="input-group-text" onclick="vista_form();">
                               <i class="bi bi-eye" id="ver"></i>
@@ -737,7 +744,18 @@
                           aria-label="Default select example"
                           id="sctRol"
                           name="sctRol"
-                          required>
+                          <?php
+
+                              if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
+
+                                echo "disabled";
+
+                              }else{
+
+                                echo "required";
+
+                              }
+                            ?> >
 
                             <option value="">Rol</option>
                             <option value="1">Administrador</option>
