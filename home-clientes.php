@@ -180,7 +180,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
           </div>
 
-          <a href = "home.php?filtro=clientes" 
+          <a href = "home-clientes.php" 
           class="nav-link px-3 sidebar-link"               
           role="button">
             <span class="me-2">
@@ -289,24 +289,13 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             </div>
 
             <?php
-              }
-        
-              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'noAlterar'){
-            ?>
-
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>No se puede alterar!</strong> Tiene que haber al menos 1 administrador.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-
-            <?php
-              }
+              }               
          
-              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'usuarioRepetido'){
+              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'clienteRepetido'){
             ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>Usuario repetido!</strong> El DNI de este usuario ya esta registrado.
+              <strong>Cliente repetido!</strong> El DNI de este cliente ya esta registrado.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -328,10 +317,6 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             
                 ?> Lista de empleados <?php
 
-              }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                ?> Lista de clientes <?php
-            
               }else{
 
                 ?> Lista del personal <?php
@@ -340,7 +325,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               
               ?>
               
-              <a href="home.php"
+              <a href="home-clientes.php"
               class="btn btn-light mx-0 px-2 py-1 "                  
               onClick="clearDatos();">
 
@@ -379,22 +364,11 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       <th scope="col">Apellido</th>
                       <th scope="col">DNI</th>
 
-                      <?php                           
+                                                 
                       
-                      if(isset($_GET['filtro']) 
-                        and $_GET['filtro'] == 1  
-                        || $_GET['filtro'] == 2
-                        || $_GET['filtro'] == 'clientes'){
-
-                        ?> <th scope="col">Teléfono</th> <?php
+                      <th scope="col">Teléfono</th> 
                     
-                      }else{
-                    
-                        ?> <th scope="col">Rol</th> <?php
-
-                      }
-
-                      ?>
+                      
                       
                       
                       <th scope="col">Opciones<th>
@@ -415,30 +389,19 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       <td><?php echo $dato->apellido; ?></td>
                       <td><?php echo $dato->dni; ?></td>
 
-                      <?php
-                      
-                      if(isset($_GET['filtro']) 
-                        and $_GET['filtro'] == 1  
-                        || $_GET['filtro'] == 2
-                        || $_GET['filtro'] == 'clientes'){
+                      <td> <?php
 
-                        ?> <td> <?php echo $dato->telefono; ?> </td> <?php
-                  
+                      if($dato->$telefono =! null){
+
+                        echo $dato->telefono;   
+
                       }else{
-                  
-                        if( $dato->rol == 1){
 
-                          ?> <td> Administrador </td> <?php
+                        echo "---";
 
-                        }else{
-
-                          ?> <td> Empleado </td> <?php
-
-                        }
-
-                      }                        
-
-                      ?>                          
+                      }
+                      
+                      ?> </td>
                     
                       <td>
 
@@ -450,7 +413,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                         <a type="button" 
                         class="btn btn-primary"                           
-                        href="editar.php?id=<?php echo $dato->id ?>&rol=<?php echo $dato->rol ?>&tipo=edit">
+                        href="editar-cliente.php?id=<?php echo $dato->id ?>&tipo=edit">
 
                           <i class="bi bi-pencil-square"></i>
 
@@ -458,7 +421,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       
                         <a type="button" 
                         class="btn btn-danger"
-                        href="eliminar.php?id=<?php echo $dato->id ?>&rol=<?php echo $dato->rol ?>"
+                        href="eliminar-cliente.php?id=<?php echo $dato->id ?>"
                         onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
 
                         <i class="bi bi-trash3-fill"></i>
@@ -473,7 +436,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                         <a type="button" 
                         class="btn btn-primary"                           
-                        href="editar.php?id=<?php echo $dato->id ?>&tipo=info">
+                        href="editar-cliente.php?id=<?php echo $dato->id ?>&tipo=info">
 
                           <i class="bi bi-info-square"></i>
 
@@ -539,24 +502,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
               <!-- FORMULARIO -->
 
-            <form action=
-            
-            <?php
-            if (isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-            
-            
-              echo 'registrar-cliente.php';
-            
-            
-            }else{ 
-            
-
-              echo 'registrar-personal.php';
-            
-            
-            }
-            ?>
-            
+            <form action= "registrar-cliente.php"
             method="POST">
 
               <div class="modal-body">
@@ -615,12 +561,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         value=""
                         autofocus
                         pattern="[0-9]+" 
-                        maxlength="10" minlenght="10"
-                        required>
-
-                        <div class= "invalid-feedback">
-                          Complete el campo
-                        </div>
+                        maxlength="10" minlenght="10">                       
 
                     </div>
 
@@ -641,7 +582,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                           Complete el campo
                         </div>
 
-                    </div>                        
+                    </div>
 
                   </div>
 
@@ -665,43 +606,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                     </div>
                     
-                    <div class="col-md-6 input-group w-50 h-100 pointer">
-
-                      <input type="password"
-                        class="form-control" 
-                        name="txtContrasena"
-                        placeholder="Contraseña" 
-                        id="txtContrasena"
-                        maxlength="20" minlenght="5"
-                        <?php
-
-                          if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                            echo "disabled";
-
-                          }else{
-
-                            echo "required";
-
-                          }
-                        ?> >
-                      
-                        <span class="input-group-text" onclick="vista_form();">
-                          <i class="bi bi-eye" id="ver"></i>
-                          <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
-                        </span>
-
-                        <div class= "invalid-feedback">
-                          Complete el campo
-                        </div>                                                                          
-
-                    </div>                                            
-
-                  </div>
-
-                  <div class="row mt-2">
-
-                    <div class="col-md-7">
+                    <div class="col-md-6">
 
                       <input type="text"
                         class="form-control mb-2" 
@@ -717,40 +622,9 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                           Complete el campo
                         </div>
 
-                    </div>
+                    </div>                   
 
-                    <div class="col-md-5">
-
-                      <select class="form-select mb-2 pointer"
-                      aria-label="Default select example"
-                      id="sctRol"
-                      name="sctRol"
-                      <?php
-
-                          if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                            echo "disabled";
-
-                          }else{
-
-                            echo "required";
-
-                          }
-                        ?> >
-
-                        <option value="">Rol</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Empleado</option> 
-
-                      </select>
-
-                      <div class= "invalid-feedback">
-                        Complete el campo
-                      </div>
-
-                    </div>
-
-                  </div>
+                  </div>                 
 
                 </div>
 

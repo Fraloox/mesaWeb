@@ -27,14 +27,7 @@
 
           // *** USER LOGEADO ***
 
-  
-    //Si hay filtro, y es 'cliente', lo aplica:
-
-  if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){ 
-
-    $sentencia = $bd->prepare("SELECT * FROM clientes"); 
-
-  }elseif(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
+  if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
   
     $sentencia = $bd->prepare(
       "SELECT * FROM usuarios 
@@ -199,7 +192,7 @@
 
               </div>
 
-              <a href = "home.php?filtro=clientes" 
+              <a href = "home-clientes.php" 
               class="nav-link px-3 sidebar-link"               
               role="button">
                 <span class="me-2">
@@ -347,10 +340,6 @@
                 
                     ?> Lista de empleados <?php
 
-                  }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                    ?> Lista de clientes <?php
-                
                   }else{
 
                     ?> Lista del personal <?php
@@ -402,8 +391,7 @@
                           
                           if(isset($_GET['filtro']) 
                             and $_GET['filtro'] == 1  
-                            || $_GET['filtro'] == 2
-                            || $_GET['filtro'] == 'clientes'){
+                            || $_GET['filtro'] == 2){
 
                             ?> <th scope="col">Teléfono</th> <?php
                         
@@ -438,8 +426,7 @@
                           
                           if(isset($_GET['filtro']) 
                             and $_GET['filtro'] == 1  
-                            || $_GET['filtro'] == 2
-                            || $_GET['filtro'] == 'clientes'){
+                            || $_GET['filtro'] == 2){
 
                             ?> <td> <?php echo $dato->telefono; ?> </td> <?php
                       
@@ -558,24 +545,7 @@
 
                   <!-- FORMULARIO -->
 
-                <form action=
-                
-                <?php
-                if (isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-                
-                
-                  echo 'registrar-cliente.php';
-                
-                
-                }else{ 
-                
-
-                  echo 'registrar-personal.php';
-                
-                
-                }
-                ?>
-                
+                <form action="registrar-personal.php"               
                 method="POST">
 
                   <div class="modal-body">
@@ -692,18 +662,7 @@
                             placeholder="Contraseña" 
                             id="txtContrasena"
                             maxlength="20" minlenght="5"
-                            <?php
-
-                              if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                                echo "disabled";
-
-                              }else{
-
-                                echo "required";
-
-                              }
-                            ?> >
+                            required>
                           
                             <span class="input-group-text" onclick="vista_form();">
                               <i class="bi bi-eye" id="ver"></i>
@@ -744,18 +703,7 @@
                           aria-label="Default select example"
                           id="sctRol"
                           name="sctRol"
-                          <?php
-
-                              if(isset($_GET['filtro']) and $_GET['filtro'] == 'clientes'){
-
-                                echo "disabled";
-
-                              }else{
-
-                                echo "required";
-
-                              }
-                            ?> >
+                          required>
 
                             <option value="">Rol</option>
                             <option value="1">Administrador</option>
