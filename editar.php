@@ -16,6 +16,7 @@ include_once 'conexion.php';
 
 $id = $_GET['id'];
 
+
 $sentencia = $bd->prepare("SELECT * FROM usuarios WHERE id = :id");
 $sentencia->bindParam(':id', $id);
 $sentencia->execute();
@@ -162,9 +163,25 @@ if(!empty($results)){
                                     value="<?php echo $persona['contrasena']; ?>" 
                                     id="txtContrasena"
                                     maxlength="20" minlenght="5"
-                                    required>
+                                    <?php
+                                    if($_GET['id'] != $_SESSION['user_id']){
+                                        echo "disabled";
+                                    }else{
+                                        echo "required";
+                                    }
+                                    ?> >
                           
-                                    <span class="input-group-text" onclick="vista_form();">
+                                    <span class="input-group-text"
+                                    <?php
+                                    if($_GET['id'] != $_SESSION['user_id']){
+                                        echo "disabled";
+                                    }else{
+                                    ?>
+                                        onclick="vista_form();"
+                                        required
+                                    <?php
+                                    }
+                                    ?> >
                                         <i class="bi bi-eye" id="ver"></i>
                                         <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
                                     </span>
