@@ -16,7 +16,7 @@
 
     if($fila['total'] == 1){
 
-        header ('Location: home.php?mensaje=usuarioRepetido');
+        header ('Location: home-clientes.php?mensaje=clienteRepetido');
         exit();
 
     }else{
@@ -30,12 +30,12 @@
     
         if($resultado === TRUE){
     
-            header('Location: home.php?mensaje=registrado');
+            header('Location: home-clientes.php?mensaje=registrado');
             exit();
 
         }else{
 
-            header('Location: home.php?mensaje=error');
+            header('Location: home-clientes.php?mensaje=error');
             exit();
     
         }

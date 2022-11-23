@@ -307,23 +307,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
             <div class="card-header">
               
-              <?php 
-              
-              if(isset($_GET['filtro']) and $_GET['filtro'] == 1){
-
-                ?> Lista de administradores <?php
-            
-              }elseif(isset($_GET['filtro']) and $_GET['filtro'] == 2){
-            
-                ?> Lista de empleados <?php
-
-              }else{
-
-                ?> Lista del personal <?php
-
-              }
-              
-              ?>
+              Lista de clientes
               
               <a href="home-clientes.php"
               class="btn btn-light mx-0 px-2 py-1 "                  
@@ -363,14 +347,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       <th scope="col">Nombre</th>
                       <th scope="col">Apellido</th>
                       <th scope="col">DNI</th>
-
-                                                 
-                      
-                      <th scope="col">Teléfono</th> 
-                    
-                      
-                      
-                      
+                      <th scope="col">Teléfono</th>
                       <th scope="col">Opciones<th>
                     </tr>
                   </thead>
@@ -391,7 +368,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                       <td> <?php
 
-                      if($dato->$telefono =! null){
+                      if($dato->telefono != ""){
 
                         echo $dato->telefono;   
 
