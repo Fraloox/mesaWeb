@@ -33,6 +33,14 @@
 
     $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
+    $elemento_x_pagina = 4;
+
+    //cuenta cuantos elementos trae de la base de datos
+    $total_elementos_db = $sentencia->rowCount();
+
+    $paginas = $total_elementos_db/$elemento_x_pagina;
+    $paginas = ceil($paginas);
+
   
   
   include 'template/headerHome.php';
@@ -427,16 +435,60 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                     
                       </td>                          
 
-                    </tr>
+                    </tr>                   
                     
                     <?php
 
                       } //TERMINA EL FOREACH
 
-                    ?>
+                    ?>                  
 
-                  </tbody>
+                  </tbody>                  
+
                 </table>
+
+                <!-- PAGINACIÓN -->
+                <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item
+                        <?php echo $_GET['pagina']>=1? 'disabled' : '' ?>">
+
+                          <a class="page-link" 
+                          href="home-clientes.php?pagina=<?php echo $_GET['pagina']-1 ?>">
+                            Anterior
+                          </a>
+
+                        </li>
+
+                        <?php 
+                        for($i=0;$i<$paginas;$i++){
+                        ?>
+
+                        <li class="page-item 
+                        <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
+                          <a class="page-link" 
+                          href="home-clientes.php?pagina=<?php echo $i+1 ?>">
+                            <?php echo $i+1 ?>
+                          </a>
+                        </li>
+
+                        <?php 
+                        }
+                        ?>
+
+                        <li class="page-item
+                        <?php echo $_GET['pagina']>=$paginas? 'disabled' : '' ?>">
+
+                          <a class="page-link" 
+                          href="home-clientes.php?pagina=<?php echo $_GET['pagina']+1 ?>">
+                            Siguiente
+                          </a>
+
+                        </li>
+                      </ul>
+                  </nav>
+                  <!-- PAGINACIÓN -->
+
               </div>
               
 
