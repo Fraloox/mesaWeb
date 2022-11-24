@@ -1,8 +1,17 @@
 <?php
 
+session_start();
+
+
 if(!isset($_GET['id'])){
     header ('Location: home.php?mensaje=error');
     exit();
+}
+
+if(isset($_SESSION['user_id'])){
+
+    $user_id = $_SESSION['user_id'];
+
 }
 
 include 'db.php';
@@ -33,9 +42,20 @@ $sentencia = $bd->prepare("DELETE FROM usuarios WHERE id = ?;" );
 $resultado = $sentencia->execute([$id]);
     
 if ($resultado === TRUE) {
+
+    if($user_id == $id){
+
+        header('Location: logout.php');
+        exit();
+
+    }else{
+
+        header ('Location: home.php?mensaje=eliminado');
+        exit();
+
+    }
     
-    header ('Location: home.php?mensaje=eliminado');
-    exit();
+    
         
 } else {
         
