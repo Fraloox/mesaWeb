@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 24-11-2022 a las 20:29:39
+-- Tiempo de generación: 25-11-2022 a las 13:27:43
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -37,14 +37,18 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `direccion` varchar(100) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `dni`, `email`, `direccion`, `telefono`) VALUES
-(1, 'Dionne', 'Sides', '78963412', 'dside0@feedburner.com', '06 Wayridge Pass', '4282878136');
+(1, 'Dionne', 'Sides', '78963412', 'dside0@feedburner.com', '06 Wayridge Pass', '4282878136'),
+(3, 'Bernelle', 'Jekyll', '45829745', 'bjekyll0@multiply.com', '88 Luster Parkway', '4705543382'),
+(4, 'Enos', 'Noen', '46512456', 'enoen1@amazon.co.uk', '3853 Cordelia Plaza', '2293473908'),
+(5, 'Nissie', 'Acutt', '45145129', 'nacutt2@hhs.gov', '803 Continental Court', '4723420324'),
+(6, 'Fidelity', 'McGeneay', '53412896', 'fmcgeneay3@cnn.com', '87437 Butterfield Parkway', '6294713072');
 
 -- --------------------------------------------------------
 

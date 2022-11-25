@@ -25,21 +25,48 @@
     }
   }
 
-          // *** USER LOGEADO ***  
+  if(!$_GET || $_GET['pagina'] == ""){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
+ 
+    header('Location: home-clientes.php?pagina=1');
 
-    $sentencia = $bd->prepare("SELECT * FROM clientes");  
+  }
 
+          // *** USER LOGEADO *** 
+
+
+          // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
+
+    $sentencia = $bd->prepare("SELECT * FROM clientes");
     $sentencia->execute();
-
     $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+    $total_elementos_db = $sentencia->rowCount();   
 
     $elemento_x_pagina = 4;
 
-    //cuenta cuantos elementos trae de la base de datos
-    $total_elementos_db = $sentencia->rowCount();
-
     $paginas = $total_elementos_db/$elemento_x_pagina;
     $paginas = ceil($paginas);
+
+          // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
+
+
+          // *** TRAE LA CANTIDAD DE ELEMENTO POR PAGINA ***
+
+    $iniciar = ($_GET['pagina']-1) * $elemento_x_pagina;
+    
+    $sentencia_element = $bd->prepare("SELECT * FROM clientes LIMIT :iniciar, :nElements");
+
+    $sentencia_element->execute();
+
+    $result_element = $sentencia_element->fetchAll(PDO::FETCH_OBJ);
+
+
+
+          // *** TRAE LA CANTIDAD DE ELEMENTO POR PAGINA ***
+
+    
+
+   
 
   
   
@@ -364,7 +391,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                     <?php
                     
-                      foreach ($personas as $dato) { //COMIENZA EL FOREACH
+                      foreach ($result_element as $dato) { //COMIENZA EL FOREACH
 
                     ?>                         
 
@@ -450,8 +477,9 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <!-- PAGINACIÓN -->
                 <nav aria-label="Page navigation example">
                       <ul class="pagination">
+
                         <li class="page-item
-                        <?php echo $_GET['pagina']>=1? 'disabled' : '' ?>">
+                          <?php echo $_GET['pagina']>=1? 'disabled' : '' ?>">
 
                           <a class="page-link" 
                           href="home-clientes.php?pagina=<?php echo $_GET['pagina']-1 ?>">
@@ -465,7 +493,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         ?>
 
                         <li class="page-item 
-                        <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
+                          <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
                           <a class="page-link" 
                           href="home-clientes.php?pagina=<?php echo $i+1 ?>">
                             <?php echo $i+1 ?>
@@ -477,7 +505,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         ?>
 
                         <li class="page-item
-                        <?php echo $_GET['pagina']>=$paginas? 'disabled' : '' ?>">
+                          <?php echo $_GET['pagina']>=$paginas? 'disabled' : '' ?>">
 
                           <a class="page-link" 
                           href="home-clientes.php?pagina=<?php echo $_GET['pagina']+1 ?>">
