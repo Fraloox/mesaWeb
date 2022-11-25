@@ -25,11 +25,11 @@
     }
   }
 
-  if(!$_GET || $_GET['pagina'] == ""){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
+  if(!$_GET){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
  
     header('Location: home-clientes.php?pagina=1');
 
-  }
+  } 
 
           // *** USER LOGEADO *** 
 
@@ -49,12 +49,20 @@
 
           // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
 
+    if($_GET['pagina'] > $paginas || $_GET['pagina'] <= 0){
+
+      header('Location: home-clientes.php?pagina=1');
+
+    }
+
 
           // *** TRAE LA CANTIDAD DE ELEMENTO POR PAGINA ***
 
     $iniciar = ($_GET['pagina']-1) * $elemento_x_pagina;
     
     $sentencia_element = $bd->prepare("SELECT * FROM clientes LIMIT :iniciar, :nElements");
+    $sentencia_element->bindparam(':iniciar', $iniciar, PDO::PARAM_INT);
+    $sentencia_element->bindparam(':nElements',$elemento_x_pagina, PDO::PARAM_INT);
 
     $sentencia_element->execute();
 
@@ -476,10 +484,10 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                 <!-- PAGINACIÓN -->
                 <nav aria-label="Page navigation example">
-                      <ul class="pagination">
+                      <ul class="pagination justify-content-center">
 
                         <li class="page-item
-                          <?php echo $_GET['pagina']>=1? 'disabled' : '' ?>">
+                          <?php echo $_GET['pagina']<=1? 'disabled' : '' ?>">
 
                           <a class="page-link" 
                           href="home-clientes.php?pagina=<?php echo $_GET['pagina']-1 ?>">

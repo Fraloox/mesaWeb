@@ -192,7 +192,7 @@
 
               </div>
 
-              <a href = "home-clientes.php?pagina=0" 
+              <a href = "home-clientes.php?pagina=1" 
               class="nav-link px-3 sidebar-link"               
               role="button">
                 <span class="me-2">
