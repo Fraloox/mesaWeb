@@ -25,6 +25,13 @@
     }
   }
 
+  if(!$_GET){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
+ 
+    header('Location: home.php?pagina=1');
+    exit();
+
+  }
+
           // *** USER LOGEADO ***
 
   if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
@@ -45,6 +52,54 @@
 
   $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
+
+  // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
+
+  $total_elementos_db = $sentencia->rowCount();
+
+  $elemento_x_pagina = 4; // *** CANTIDAD DE ELEMENTOS POR PAGINA PARA LA PAGINACION ***
+
+  $paginas = $total_elementos_db/$elemento_x_pagina;
+  $paginas = ceil($paginas); // redondea al siguiente numero
+
+  // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
+
+
+  if($_GET['pagina'] > $paginas || $_GET['pagina'] <= 0){
+
+    header('Location: home.php?pagina=1');
+
+  }
+
+  // *** TRAE LA CANTIDAD DE ELEMENTO POR PAGINA ***
+
+  $iniciar = ($_GET['pagina']-1) * $elemento_x_pagina;
+
+  if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
+  
+    $sentencia = $bd->prepare(
+      "SELECT * FROM usuarios
+      LIMIT :iniciar, :nElements 
+      WHERE rol = :rol");
+      
+      $sentencia_element->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
+      $sentencia_element->bindParam(':nElements', $elemento_x_pagina, PDO::PARAM_INT);
+      $sentencia_element->bindParam(':rol', $_GET['filtro']);
+
+      $sentencia_element->execute();
+
+  
+  }else{ //si no hay filtro, trae todos los usuarios
+ 
+    $sentencia_element = $bd->prepare("SELECT * FROM clientes LIMIT :iniciar, :nElements");
+    
+    $sentencia_element->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
+    $sentencia_element->bindParam(':nElements', $elemento_x_pagina, PDO::PARAM_INT);
+    $sentencia_element->bindParam(':rol', $_GET['filtro']);
+
+    $sentencia_element->execute();
+
+  } 
   
   
   include 'template/headerHome.php';

@@ -14,7 +14,7 @@
       WHERE id = :id');    
     $records->bindParam(':id', $_SESSION['user_id']);
     $records->execute();
-    $results = $records->fetch(PDO::FETCH_ASSOC);
+    $results = $records->fetch(PDO::FETCH_ASSOC);  
 
     $user = null;
 
@@ -28,6 +28,7 @@
   if(!$_GET){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
  
     header('Location: home-clientes.php?pagina=1');
+    exit();
 
   } 
 
@@ -42,7 +43,7 @@
 
     $total_elementos_db = $sentencia->rowCount();   
 
-    $elemento_x_pagina = 4;
+    $elemento_x_pagina = 4; // *** CANTIDAD DE ELEMENTOS POR PAGINA PARA LA PAGINACION ***
 
     $paginas = $total_elementos_db/$elemento_x_pagina;
     $paginas = ceil($paginas);
@@ -483,6 +484,10 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 </table>
 
                 <!-- PAGINACIÓN -->
+                <?php 
+                  if($total_elementos_db > $elemento_x_pagina){
+                ?>
+
                 <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-center">
 
@@ -500,12 +505,14 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         for($i=0;$i<$paginas;$i++){
                         ?>
 
-                        <li class="page-item 
+                        <li class="page-item
                           <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
+
                           <a class="page-link" 
                           href="home-clientes.php?pagina=<?php echo $i+1 ?>">
                             <?php echo $i+1 ?>
                           </a>
+
                         </li>
 
                         <?php 
@@ -523,6 +530,10 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         </li>
                       </ul>
                   </nav>
+
+                  <?php
+                  }
+                  ?>
                   <!-- PAGINACIÓN -->
 
               </div>

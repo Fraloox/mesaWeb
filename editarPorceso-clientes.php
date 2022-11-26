@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($_POST['id'])){    
-    header('Location: home-clientes.php?mensaje=error');
+    header('Location: home-clientes.php?mensaje=error&pagina=1');
     exit();
 }
 
@@ -32,7 +32,7 @@ $sentencia->bindParam(':id', $id);
 
 $sentencia->execute();
 
-header('Location: home-clientes.php?mensaje=editado');
+header('Location: home-clientes.php?mensaje=editado&pagina=1');
 exit();
 
 ?>

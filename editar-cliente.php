@@ -7,7 +7,7 @@ session_start();
 
 if(empty($_GET['id'])){
 
-    header('Location: home-clientes.php?mensaje=error');
+    header('Location: home-clientes.php?mensaje=error&pagina=1');
     exit();
 
 }
@@ -38,7 +38,7 @@ if(!empty($results)){
 <div class="container-fluid">
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php">
+  href="home.php?pagina=1">
     C.P.C.®
   </a>  
 
@@ -62,7 +62,7 @@ if(!empty($results)){
                 <!-- FORMULARIO -->
 
                 <form class="p-4" method="POST" 
-                action="editarPorceso-clientes.php">
+                action="editarPorceso-clientes.php?pagina=1">
 
                     <input type="hidden" 
                     name="id"
@@ -210,7 +210,7 @@ if(!empty($results)){
                         
                         <a type="button" 
                         class="btn btn-secondary mx-3" 
-                        href="home-clientes.php">
+                        href="home-clientes.php?pagina=1">
                             Cancelar
                         </a>
 
@@ -227,7 +227,7 @@ if(!empty($results)){
 
                         <a type="button" 
                         class="btn btn-primary" 
-                        href="home-clientes.php" >
+                        href="home-clientes.php?pagina=1" >
                             Volver
                         </a>   
 
