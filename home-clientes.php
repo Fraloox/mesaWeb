@@ -53,6 +53,7 @@
     if($_GET['pagina'] > $paginas || $_GET['pagina'] <= 0){
 
       header('Location: home-clientes.php?pagina=1');
+      exit();
 
     }
 
@@ -192,7 +193,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                 <li>
 
-                  <a href="home.php?filtro=2"  
+                  <a href="home.php?filtro=2&pagina=1"  
                   class="nav-link px-3">
                     <span class="me-2">
                       <i class="bi bi-file-earmark-person"></i>
@@ -206,7 +207,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 
                 <li>
 
-                  <a href="home.php?filtro=1" 
+                  <a href="home.php?filtro=1&pagina=1" 
                   class="nav-link px-3">
                     <span class="me-2">
                       <i class="bi bi-person-circle"></i>
@@ -224,7 +225,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
           </div>
 
-          <a href = "home-clientes.php" 
+          <a href = "home-clientes.php&pagina=1" 
           class="nav-link px-3 sidebar-link"               
           role="button">
             <span class="me-2">
@@ -353,7 +354,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               
               Lista de clientes
               
-              <a href="home-clientes.php"
+              <a href="home-clientes.php&pagina=1"
               class="btn btn-light mx-0 px-2 py-1 "                  
               onClick="clearDatos();">
 

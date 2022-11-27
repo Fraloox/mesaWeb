@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($_POST['id'])){    
-    header('Location: home.php?mensaje=error');
+    header('Location: home.php?mensaje=error&pagina=1');
     exit();
 }
 
@@ -21,7 +21,7 @@ if($_POST['sctRol'] == 2 ){
 
     if($fila == 1){
 
-        header ('Location: home.php?mensaje=noAlterar');
+        header ('Location: home.php?mensaje=noAlterar&pagina=1');
         exit();
 
     }
@@ -56,7 +56,7 @@ $sentencia->bindParam(':id', $id);
 
 $sentencia->execute();
 
-header('Location: home.php?mensaje=editado');
+header('Location: home.php?mensaje=editado&pagina=1');
 exit();
 
 ?>

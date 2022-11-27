@@ -68,6 +68,7 @@
   if($_GET['pagina'] > $paginas || $_GET['pagina'] <= 0){
 
     header('Location: home.php?pagina=1');
+    exit();
 
   }
 
@@ -77,10 +78,10 @@
 
   if(isset($_GET['filtro'])){ //Si hay filtro, lo aplica
   
-    $sentencia = $bd->prepare(
+    $sentencia_element = $bd->prepare(
       "SELECT * FROM usuarios
-      LIMIT :iniciar, :nElements 
-      WHERE rol = :rol");
+      WHERE rol = :rol      
+      LIMIT :iniciar, :nElements");
       
       $sentencia_element->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
       $sentencia_element->bindParam(':nElements', $elemento_x_pagina, PDO::PARAM_INT);
@@ -91,15 +92,19 @@
   
   }else{ //si no hay filtro, trae todos los usuarios
  
-    $sentencia_element = $bd->prepare("SELECT * FROM clientes LIMIT :iniciar, :nElements");
+    $sentencia_element = $bd->prepare("SELECT * FROM usuarios LIMIT :iniciar, :nElements");
     
     $sentencia_element->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
-    $sentencia_element->bindParam(':nElements', $elemento_x_pagina, PDO::PARAM_INT);
-    $sentencia_element->bindParam(':rol', $_GET['filtro']);
+    $sentencia_element->bindParam(':nElements', $elemento_x_pagina, PDO::PARAM_INT);    
 
     $sentencia_element->execute();
 
   } 
+
+  $result_element = $sentencia_element->fetchAll(PDO::FETCH_OBJ);
+
+  // *** TRAE LA CANTIDAD DE ELEMENTO POR PAGINA ***
+
   
   
   include 'template/headerHome.php';
@@ -215,7 +220,7 @@
 
                     <li>
 
-                      <a href="home.php?filtro=2"  
+                      <a href="home.php?filtro=2&pagina=1"  
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-file-earmark-person"></i>
@@ -229,7 +234,7 @@
                     
                     <li>
 
-                      <a href="home.php?filtro=1" 
+                      <a href="home.php?filtro=1&pagina=1" 
                       class="nav-link px-3">
                         <span class="me-2">
                           <i class="bi bi-person-circle"></i>
@@ -467,7 +472,7 @@
 
                         <?php
                         
-                          foreach ($personas as $dato) { //COMIENZA EL FOREACH
+                          foreach ($result_element as $dato) { //COMIENZA EL FOREACH
 
                         ?>                         
 
@@ -558,6 +563,74 @@
 
                       </tbody>
                     </table>
+
+                    <!-- PAGINACIÓN -->
+                <?php 
+                  if($total_elementos_db > $elemento_x_pagina){
+                ?>
+
+                <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+
+                        <li class="page-item
+                          <?php echo $_GET['pagina']<=1? 'disabled' : '' ?>">
+
+                          <a class="page-link" 
+                          href="home.php?pagina=<?php echo $_GET['pagina']-1?><?php 
+                          if(isset($_GET['filtro'])){
+                            echo '&filtro='.$_GET['filtro'];
+                          }?>">
+
+                            Anterior
+
+                          </a>
+
+                        </li>
+
+                        <?php 
+                        for($i=0;$i<$paginas;$i++){
+                        ?>
+
+                        <li class="page-item
+                          <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
+
+                          <a class="page-link" 
+                          href="home.php?pagina=<?php echo $i+1 ?><?php 
+                          if(isset($_GET['filtro'])){
+                            echo '&filtro='.$_GET['filtro'];
+                          }?>">
+
+                            <?php echo $i+1 ?>
+
+                          </a>
+
+                        </li>
+
+                        <?php 
+                        }
+                        ?>
+
+                        <li class="page-item
+                          <?php echo $_GET['pagina']>=$paginas? 'disabled' : '' ?>">
+
+                          <a class="page-link" 
+                          href="home.php?pagina=<?php echo $_GET['pagina']+1 ?><?php 
+                          if(isset($_GET['filtro'])){
+                            echo '&filtro='.$_GET['filtro'];
+                          }?>">
+
+                            Siguiente
+
+                          </a>
+
+                        </li>
+                      </ul>
+                  </nav>
+
+                  <?php
+                  }
+                  ?>
+                  <!-- PAGINACIÓN -->
                   </div>
                   
 

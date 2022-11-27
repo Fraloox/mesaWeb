@@ -39,7 +39,7 @@ if(!empty($results)){
 <div class="container-fluid">
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php">
+  href="home.php&pagina=1">
     C.P.C.®
   </a>  
 
@@ -57,7 +57,7 @@ if(!empty($results)){
             <div class="card">
 
                 <div class="card-header">
-                    Editar datos:
+                    <?php echo $_GET['tipo']=='info' ? 'Ver datos':'Editar datos'?>
                 </div>
 
                 <!-- FORMULARIO -->
@@ -75,7 +75,11 @@ if(!empty($results)){
 
                             <div class="row">
 
-                                <div class="col-md-6">                          
+                                <div class="col-md-6">
+                                    
+                                    <label class="form-label">
+                                        Nombre:
+                                    </label>
 
                                     <input type="text"
                                     class="form-control mb-2"
@@ -85,11 +89,15 @@ if(!empty($results)){
                                     value="<?php echo $persona['nombre']; ?>"
                                     autofocus
                                     maxlength="20" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?> >
                         
                                 </div>
 
                                 <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Apellido:
+                                    </label>
                   
                                     <input type="text"
                                     class="form-control mb-2"
@@ -99,7 +107,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['apellido']; ?>"  
                                     autofocus
                                     maxlength="20" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?> >
                         
                                 </div>
 
@@ -108,6 +116,10 @@ if(!empty($results)){
                             <div class="row">                       
 
                                 <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Teléfono:
+                                    </label>
 
                                     <input type="text"
                                     class="form-control mb-2" 
@@ -118,11 +130,15 @@ if(!empty($results)){
                                     autofocus
                                     pattern="[0-9]+" 
                                     maxlength="10" minlenght="10"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?> >
 
                                 </div>
 
                                 <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        DNI:
+                                    </label>
 
                                     <input type="text"
                                     class="form-control mb-2"
@@ -130,8 +146,7 @@ if(!empty($results)){
                                     name="txtDni"
                                     placeholder= "DNI" 
                                     value="<?php echo $persona['dni']; ?>"                                   
-                                    pattern="[0-9]+" 
-                                    aria-label="Disabled input example" 
+                                    pattern="[0-9]+"  
                                     disabled>
 
                                 </div>                        
@@ -142,6 +157,10 @@ if(!empty($results)){
 
                                 <div class="col-md-6">
 
+                                    <label class="form-label">
+                                        Email:
+                                    </label>
+
                                     <input type="text"
                                     class="form-control mb-2"
                                     id="txtEmail" 
@@ -150,11 +169,15 @@ if(!empty($results)){
                                     value="<?php echo $persona['email']; ?>"                            
                                     autofocus
                                     maxlength="30" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?> >
 
                                 </div>
                         
                                 <div class="col-md-6 input-group w-50 h-100 pointer">
+
+                                    <label class="form-label">
+                                        Contraseña:
+                                    </label>                                    
 
                                     <input type="password"
                                     class="form-control" 
@@ -163,17 +186,11 @@ if(!empty($results)){
                                     value="<?php echo $persona['contrasena']; ?>" 
                                     id="txtContrasena"
                                     maxlength="20" minlenght="5"
-                                    <?php
-                                    if($_GET['id'] != $_SESSION['user_id']){
-                                        echo "disabled";
-                                    }else{
-                                        echo "required";
-                                    }
-                                    ?> >
+                                    <?php echo $_GET['id'] != $_SESSION['user_id']? 'readonly': 'required'?> > 
                           
                                     <span class="input-group-text"
                                     <?php
-                                    if($_GET['id'] != $_SESSION['user_id']){
+                                    if($_GET['id'] != $_SESSION['user_id']){ //Solo deja ver la contraseña si es el usuario logueado
                                         echo "disabled";
                                     }else{
                                     ?>
@@ -195,6 +212,10 @@ if(!empty($results)){
 
                                 <div class="col-md-7">
 
+                                    <label class="form-label">
+                                        Dirección:
+                                    </label>
+
                                     <input type="text"
                                     class="form-control mb-2" 
                                     id="txtDireccion"
@@ -207,19 +228,25 @@ if(!empty($results)){
 
                                 </div>
 
-                                <div class="col-md-5">                                   
+                                <div class="col-md-5">
 
+                                    <label class="form-label">
+                                        Rol:
+                                    </label>
+                                                
                                     <select class="form-select mb-2 pointer" 
-                                    aria-label="Default select example"
-                                    id="sctRol"
-                                    name="sctRol"
-                                    required>
-                                        
+                                        aria-label="Default select example"
+                                        id="sctRol"
+                                        name="sctRol"
+                                        <?php echo $_GET['tipo']=='info' ? 'disabled':'required'?> >
+
                                         <option value="">Rol</option>
                                         <option value="1">Administrador</option>
                                         <option value="2">Empleado</option> 
 
                                     </select>
+
+                                    
 
                                 </div>
 
