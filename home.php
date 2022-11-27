@@ -263,7 +263,8 @@
                 </span>                
               </a>
 
-              <a class="nav-link px-3 sidebar-link"               
+              <a href = "home-productos.php?pagina=1"
+              class="nav-link px-3 sidebar-link"               
               role="button">
                 <span class="me-2">
                   <i class="bi bi-box-seam"></i>

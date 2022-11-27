@@ -27,7 +27,7 @@
 
   if(!$_GET){ //redirecciono a la 1er pagina si no hay un GET, es el "por defecto"
  
-    header('Location: home-clientes.php?pagina=1');
+    header('Location: home-productos.php?pagina=1');
     exit();
 
   } 
@@ -37,7 +37,7 @@
 
           // *** CONTEO PARA SABER CUANTAS PAGINAS SE NECESITA ***
 
-    $sentencia = $bd->prepare("SELECT * FROM clientes");
+    $sentencia = $bd->prepare("SELECT * FROM productos");
     $sentencia->execute();
     $personas = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
@@ -52,7 +52,7 @@
 
     if($_GET['pagina'] > $paginas || $_GET['pagina'] <= 0){
 
-      header('Location: home-clientes.php?pagina=1');
+      header('Location: home-productos.php?pagina=1');
       exit();
 
     }
@@ -62,7 +62,7 @@
 
     $iniciar = ($_GET['pagina']-1) * $elemento_x_pagina;
     
-    $sentencia_element = $bd->prepare("SELECT * FROM clientes LIMIT :iniciar, :nElements");
+    $sentencia_element = $bd->prepare("SELECT * FROM productos LIMIT :iniciar, :nElements");
     $sentencia_element->bindparam(':iniciar', $iniciar, PDO::PARAM_INT);
     $sentencia_element->bindparam(':nElements',$elemento_x_pagina, PDO::PARAM_INT);
 
@@ -236,7 +236,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             </span>                
           </a>
 
-          <a href = "home-productos.php?pagina=1" 
+          <a href = "home-productos.php?pagina=1"
           class="nav-link px-3 sidebar-link"               
           role="button">
             <span class="me-2">
@@ -337,11 +337,11 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <?php
               }               
          
-              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'clienteRepetido'){
+              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'productoRepetido'){
             ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>Cliente repetido!</strong> El DNI de este cliente ya esta registrado.
+              <strong>Producto repetido!</strong> El este producto ya esta registrado.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -353,9 +353,9 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
             <div class="card-header">
               
-              Lista de clientes
+              Lista de productos
               
-              <a href="home-clientes.php?pagina=1"
+              <a href="home-productos.php?pagina=1"
               class="btn btn-light mx-0 px-2 py-1 "                  
               onClick="clearDatos();">
 
@@ -390,10 +390,11 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <table class="table">
                   <thead>
                     <tr>
+                      <th scope="col">Id</th>
                       <th scope="col">Nombre</th>
-                      <th scope="col">Apellido</th>
-                      <th scope="col">DNI</th>
-                      <th scope="col">Teléfono</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">Stock</th>
+                      <th scope="col">Precio</th>
                       <th scope="col">Opciones<th>
                     </tr>
                   </thead>
@@ -408,23 +409,11 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                     <tr>                          
 
-                      <td scope="row" ><?php echo $dato->nombre; ?></td>
-                      <td><?php echo $dato->apellido; ?></td>
-                      <td><?php echo $dato->dni; ?></td>
-
-                      <td> <?php
-
-                      if($dato->telefono != ""){
-
-                        echo $dato->telefono;   
-
-                      }else{
-
-                        echo "---";
-
-                      }
-                      
-                      ?> </td>
+                      <td scope="row" ><?php echo $dato->id; ?></td>
+                      <td><?php echo $dato->nombre; ?></td>
+                      <td><?php echo $dato->marca; ?></td>
+                      <td><?php echo $dato->cantidad; ?></td>
+                      <td> $ <?php echo $dato->precio; ?> </td>
                     
                       <td>
 
@@ -436,7 +425,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                         <a type="button" 
                         class="btn btn-primary"                           
-                        href="editar-cliente.php?id=<?php echo $dato->id ?>&tipo=edit">
+                        href="editar-producto.php?id=<?php echo $dato->id ?>&tipo=edit">
 
                           <i class="bi bi-pencil-square"></i>
 
@@ -444,10 +433,10 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       
                         <a type="button" 
                         class="btn btn-danger"
-                        href="eliminar-cliente.php?id=<?php echo $dato->id ?>"
-                        onclick="return confirm('¿Estas seguro de eliminar a esta persona?');">
+                        href="eliminar-producto.php?id=<?php echo $dato->id ?>"
+                        onclick="return confirm('¿Estas seguro de eliminar este producto?, también se eliminarán todas las unidades');">
 
-                        <i class="bi bi-trash3-fill"></i>
+                          <i class="bi bi-trash3-fill"></i>
 
                         </a>
                         
@@ -459,7 +448,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                         <a type="button" 
                         class="btn btn-primary"                           
-                        href="editar-cliente.php?id=<?php echo $dato->id ?>&tipo=info">
+                        href="editar-producto.php?id=<?php echo $dato->id ?>&tipo=info">
 
                           <i class="bi bi-info-square"></i>
 
@@ -497,7 +486,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                           <?php echo $_GET['pagina']<=1? 'disabled' : '' ?>">
 
                           <a class="page-link" 
-                          href="home-clientes.php?pagina=<?php echo $_GET['pagina']-1 ?>">
+                          href="home-productos.php?pagina=<?php echo $_GET['pagina']-1 ?>">
                             Anterior
                           </a>
 
@@ -511,7 +500,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                           <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
 
                           <a class="page-link" 
-                          href="home-clientes.php?pagina=<?php echo $i+1 ?>">
+                          href="home-productos.php?pagina=<?php echo $i+1 ?>">
                             <?php echo $i+1 ?>
                           </a>
 
@@ -525,7 +514,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                           <?php echo $_GET['pagina']>=$paginas? 'disabled' : '' ?>">
 
                           <a class="page-link" 
-                          href="home-clientes.php?pagina=<?php echo $_GET['pagina']+1 ?>">
+                          href="home-productos.php?pagina=<?php echo $_GET['pagina']+1 ?>">
                             Siguiente
                           </a>
 
@@ -580,7 +569,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
               <!-- FORMULARIO -->
 
-            <form action= "registrar-cliente.php"
+            <form action= "registrar-producto.php"
             method="POST">
 
               <div class="modal-body">
@@ -589,7 +578,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                   <div class="row">
 
-                    <div class="col-md-6">                          
+                    <div class="col-md-8">                          
 
                       <input type="text"
                       class="form-control mb-2"
@@ -598,7 +587,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                       placeholder= "Nombre"
                       value=""
                       autofocus
-                      maxlength="20" minlenght="3"
+                      maxlength="50" minlenght="3"
                       required>
 
                       <div class= "invalid-feedback">
@@ -607,16 +596,16 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                     
                     </div>
 
-                    <div class="col-md-6">
-              
-                      <input type="text"
+                    <div class="col-md-4">                          
+
+                      <input type="number"
                       class="form-control mb-2"
-                      id="txtApellido" 
-                      name="txtApellido"
-                      placeholder= "Apellido"
-                      value="" 
-                      autofocus
-                      maxlength="20" minlenght="3"
+                      id="txtCantidad" 
+                      name="txtCantidad"
+                      placeholder= "Cantidad"
+                      value=""
+                      autofocus                         
+                      min="0"
                       required>
 
                       <div class= "invalid-feedback">
@@ -633,27 +622,26 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
                       <input type="text"
                         class="form-control mb-2" 
-                        id="txtTelefono"
-                        name="txtTelefono"
-                        placeholder= "Teléfono" 
+                        id="txtMarca"
+                        name="txtMarca"
+                        placeholder= "Marca" 
                         value=""
-                        autofocus
-                        pattern="[0-9]+" 
-                        maxlength="10" minlenght="10">                       
+                        autofocus                       
+                        maxlength="30" minlenght="30">                       
 
                     </div>
 
                     <div class="col-md-6">
 
-                      <input type="text"
+                      <input type="number"
                         class="form-control mb-2"
-                        id="txtDni" 
-                        name="txtDni"
-                        placeholder= "DNI" 
+                        id="txtPrecio" 
+                        name="txtPrecio"
+                        placeholder= "Precio" 
                         value=""
                         autofocus
-                        pattern="[0-9]+" 
-                        maxlength="8" minlenght="8"
+                        step="0.01"                         
+                        min="0"
                         required>
 
                         <div class= "invalid-feedback">
@@ -665,42 +653,19 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                   </div>
 
                   <div class="row mt-2">
+                    <label class="form-label">
+                      Descripción:
+                    </label>
 
-                    <div class="col-md-6">
-
-                      <input type="text"
-                        class="form-control mb-2"
-                        id="txtEmail" 
-                        name="txtEmail"
-                        placeholder="Email" 
-                        value=""                            
-                        autofocus
-                        maxlength="30" minlenght="3"
-                        required>
-
-                        <div class= "invalid-feedback">
-                          Complete el campo
-                        </div>
-
-                    </div>
-                    
-                    <div class="col-md-6">
-
-                      <input type="text"
-                        class="form-control mb-2" 
-                        id="txtDireccion"
-                        name="txtDireccion"
-                        placeholder="Dirección" 
-                        value=""
-                        autofocus
-                        maxlength="100" minlenght="10"
-                        required>
-
-                        <div class= "invalid-feedback">
-                          Complete el campo
-                        </div>
-
-                    </div>                   
+                    <div class="input-group">  
+                      <textarea id= "txtDescripcion"
+                      name="txtDescripcion"
+                      class="form-control"                      
+                      maxlength="500"
+                      value=""
+                      required>
+                      </textarea>
+                    </div>      
 
                   </div>                 
 
