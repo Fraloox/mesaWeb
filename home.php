@@ -128,7 +128,7 @@
       <!--offcanvas trigger-->
 
       <a class="navbar-brand fw-bold text-uppercase me-auto" 
-      href="home.php"> <!-- Direccion -->
+      href="home.php?pagina=1"> <!-- Direccion -->
 
         C.P.C.®
 
@@ -150,18 +150,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end" 
           aria-labelledby="navbarDropdown">
-
-            <li>
-              <a class="dropdown-item" 
-                href="#">
-                Información
-              </a>
-            </li>            
-
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-
+          
             <li>            
               <a class="dropdown-item text-danger" 
                 href="logout.php">

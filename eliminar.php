@@ -29,7 +29,7 @@ if($_GET['rol'] == 1 ){
 
     if($fila == 1){
 
-        header ('Location: home.php?mensaje=noAlterar');
+        header ('Location: home.php?mensaje=noAlterar&pagina=1');
         exit();
 
     }

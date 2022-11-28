@@ -39,7 +39,7 @@ if(!empty($results)){
 <div class="container-fluid">
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php&pagina=1">
+  href="home.php?pagina=1">
     C.P.C.®
   </a>  
 

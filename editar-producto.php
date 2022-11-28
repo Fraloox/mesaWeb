@@ -38,7 +38,7 @@ if(!empty($results)){
 <div class="container-fluid">
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php?pagina=1">
+  href="<?php echo $_GET['tipo']=='for-client' ? 'vistaDeProductos.php?pagina=1':'home.php?pagina=1' ?>">
     C.P.C.®
   </a>  
 

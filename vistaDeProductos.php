@@ -101,7 +101,7 @@
   <!--offcanvas trigger-->
 
   <a class="navbar-brand fw-bold text-uppercase me-auto" 
-  href="home.php"> <!-- Direccion -->
+  href="vistaDeProductos.php?pagina=1"> <!-- Direccion -->
 
     C.P.C.®
 
@@ -207,7 +207,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               
               Lista de productos
               
-              <a href="home-productos.php?pagina=1"
+              <a href="vistaDeProductos.php?pagina=1"
               class="btn btn-light mx-0 px-2 py-1 "                  
               onClick="clearDatos();">
 
