@@ -88,7 +88,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['nombre']; ?>"
                                     autofocus
                                     maxlength="20" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
                         
                                 </div>
 
@@ -106,7 +106,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['apellido']; ?>"  
                                     autofocus
                                     maxlength="20" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
                         
                                 </div>
 
@@ -128,7 +128,8 @@ if(!empty($results)){
                                     value="<?php echo $persona['telefono']; ?>"
                                     autofocus
                                     pattern="[0-9]+" 
-                                    maxlength="10" minlenght="10">
+                                    maxlength="10" minlenght="10"
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
 
                                 </div>
 
@@ -167,7 +168,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['email']; ?>"                            
                                     autofocus
                                     maxlength="30" minlenght="3"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
 
                                 </div>
                                 
@@ -185,7 +186,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['direccion']; ?>"
                                     autofocus
                                     maxlength="100" minlenght="10"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
 
                                 </div>
 

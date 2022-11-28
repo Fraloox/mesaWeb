@@ -4,11 +4,11 @@ session_start();
 
 include 'conexion.php';
 
-if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
+if (!empty($_POST['txtDni'])){
 
   $sentencia = $bd->prepare(
-    'SELECT id, dni, contrasena 
-    FROM usuarios
+    'SELECT id, dni 
+    FROM clientes
     WHERE dni=:dni');
 
   $sentencia->bindParam(':dni', $_POST['txtDni']);
@@ -21,17 +21,8 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
 
   if(!empty($resultado)){
 
-    if (count($resultado) > 0 && $_POST['txtPass'] == $resultado['contrasena']){
-
-      $_SESSION['user_id'] = $resultado['id'];
-  
-      header('Location: home.php');
-  
-    }else{
-  
-      $mensaje = 'Las credenciales no coinciden.';
-  
-    }  
+    header('Location: vistaDeProductos?pagina=1');
+    exit();
 
   }else{
 
@@ -79,7 +70,7 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
 
                 <!-- LOGIN -->
 
-                <form action="index.php" method="POST" class="needs-validation mb-4">
+                <form action="login-cliente.php" method="POST" class="needs-validation mb-4">
 
                   <div class="mb-4"> <!-- ESTE ES EL IMPUT DNI -->                    
 
@@ -97,28 +88,7 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
                       Complete el campo
                     </div>
 
-                  </div>
-
-                  <div class="mb-4 input-group w-100"> <!-- ESTE ES EL IMPUT CONTRASEÑA -->                  
-
-                    <input type="password"
-                    class="form-control" 
-                    name="txtPass"
-                    placeholder="Contraseña" 
-                    id="txtPass"
-                    maxlength="20" minlenght="5"
-                    required>                  
-
-                    <span class="input-group-text pointer" onclick="vista_form();">
-                      <i class="bi bi-eye" id="ver"></i>
-                      <i class="bi bi-eye-slash" id="ocultar" style="display:none;"></i>
-                    </span>
-
-                    <div class= "invalid-feedback">
-                      Complete el campo
-                    </div>
-
-                  </div>  
+                  </div>                    
                   
                   <!-- ALERTAS -->
 
@@ -155,19 +125,21 @@ if (!empty($_POST['txtDni']) && !empty($_POST['txtPass'])){
                   <!-- ALERTAS -->
 
                   <div class="d-grid" > <!-- Botón de iniciar sesion -->
+
                     <button type="submit" 
                     class="btn btn-primary" 
                     id="btn-iniciarSesion">
                       Iniciar Sesión
                     </button>
-                  </div>
 
+                  </div>
+                  
                   <div class="d-grid mt-2" > <!-- Botón de iniciar sesion -->
                     <a type="button" 
                     class="btn btn-success"
-                    href="login-cliente.php" 
-                    id="btn-Cliente">
-                      Soy Cliente
+                    href="index.php" 
+                    id="btn-Personal">
+                      Trabajo en CPC®
                     </a>
                   </div>
 

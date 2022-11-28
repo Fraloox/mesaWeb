@@ -175,7 +175,7 @@ if(!empty($results)){
                         
                                 <div class="col-md-6 input-group w-50 h-100 pointer">
 
-                                    <label class="form-label">
+                                    <label class="form-label input-group">
                                         Contraseña:
                                     </label>                                    
 
@@ -224,7 +224,7 @@ if(!empty($results)){
                                     value="<?php echo $persona['direccion']; ?>"
                                     autofocus
                                     maxlength="100" minlenght="10"
-                                    required>
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
 
                                 </div>
 

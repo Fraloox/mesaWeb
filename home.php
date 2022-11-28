@@ -539,7 +539,7 @@
                             ?>
 
                             <a type="button" 
-                            class="btn btn-primary"                           
+                            class="btn btn-info"                           
                             href="editar.php?id=<?php echo $dato->id ?>&tipo=info">
 
                               <i class="bi bi-info-square"></i>

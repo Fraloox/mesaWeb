@@ -74,7 +74,7 @@ if(!empty($results)){
 
                             <div class="row">
 
-                                <div class="col-md-6">  
+                                <div class="col-md-8">  
                                     
                                     <label class="form-label">
                                         Nombre:
@@ -85,111 +85,103 @@ if(!empty($results)){
                                     id="txtNombre" 
                                     name="txtNombre"
                                     placeholder= "Nombre"
-                                    value="<?php echo $persona['nombre']; ?>"
+                                    value="<?php echo $producto['nombre']; ?>"
                                     autofocus
-                                    maxlength="20" minlenght="3"
-                                    required>
+                                    maxlength="50" minlenght="3"
+                                    <?php echo $_GET['tipo']=='info'||$_GET['tipo']=='for-client' ? 'readonly':'required'?>>
                         
                                 </div>
 
-                                <div class="col-md-6">
-
+                                <div class="col-md-4">
+                                    
                                     <label class="form-label">
-                                        Apellido:
+                                        Cantidad:
                                     </label>
-                  
-                                    <input type="text"
+
+                                    <input type="number"
                                     class="form-control mb-2"
-                                    id="txtApellido" 
-                                    name="txtApellido"
-                                    placeholder= "Apellido"
-                                    value="<?php echo $persona['apellido']; ?>"  
-                                    autofocus
-                                    maxlength="20" minlenght="3"
-                                    required>
-                        
+                                    id="txtCantidad" 
+                                    name="txtCantidad"
+                                    placeholder= "Cantidad"
+                                    value="<?php echo $producto['cantidad']; ?>"
+                                    autofocus                         
+                                    min="0"
+                                    <?php echo $_GET['tipo']=='info'||$_GET['tipo']=='for-client' ? 'readonly':'required'?>>
+
+                                    <div class= "invalid-feedback">
+                                        Complete el campo
+                                    </div>
+                    
                                 </div>
 
                             </div>
                       
                             <div class="row">                       
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
 
                                     <label class="form-label">
-                                        Teléfono:
+                                        Marca:
                                     </label>
 
                                     <input type="text"
                                     class="form-control mb-2" 
-                                    id="txtTelefono"
-                                    name="txtTelefono"
-                                    placeholder= "Teléfono" 
-                                    value="<?php echo $persona['telefono']; ?>"
-                                    autofocus
-                                    pattern="[0-9]+" 
-                                    maxlength="10" minlenght="10">
+                                    id="txtMarca"
+                                    name="txtMarca"
+                                    placeholder= "Marca" 
+                                    value="<?php echo $producto['marca']; ?>"
+                                    autofocus                       
+                                    maxlength="30" minlenght="30"
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>                       
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4 ">
 
                                     <label class="form-label">
-                                        DNI:
-                                    </label>
+                                        Precio:
+                                    </label> 
+                                    
+                                    
 
-                                    <input type="text"
+                                    <input type="number"
                                     class="form-control mb-2"
-                                    id="txtDni" 
-                                    name="txtDni"
-                                    placeholder= "DNI" 
-                                    value="<?php echo $persona['dni']; ?>"                                   
-                                    pattern="[0-9]+"                                    
-                                    disabled>
+                                    id="txtPrecio" 
+                                    name="txtPrecio"
+                                    placeholder= "Precio" 
+                                    value="<?php echo $producto['precio']; ?>"
+                                    autofocus
+                                    step="0.01"                         
+                                    min="0"
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>>
 
-                                </div>                        
+                                    
+
+                                    <div class= "invalid-feedback">
+                                    Complete el campo
+                                    </div>
+
+                                </div>
 
                             </div>
 
-                            <div class="row mt-2">
+                            <div class="row mt-2 mb-2">
+                    
+                                <label class="form-label">
+                                Descripción:
+                                </label>
 
-                                <div class="col-md-6">
+                                <div class="input-group">  
+                                    <textarea id= "txtDescripcion"
+                                    name="txtDescripcion"
+                                    class="form-control"                      
+                                    maxlength="500"
+                                    cols="80"                                    
+                                    <?php echo $_GET['tipo']=='info' ? 'readonly':'required'?>
+                                    ><?php echo $producto['descripcion']; ?></textarea>
+                                </div>      
 
-                                    <label class="form-label">
-                                        Email:
-                                    </label>
-
-                                    <input type="text"
-                                    class="form-control mb-2"
-                                    id="txtEmail" 
-                                    name="txtEmail"
-                                    placeholder="Email" 
-                                    value="<?php echo $persona['email']; ?>"                            
-                                    autofocus
-                                    maxlength="30" minlenght="3"
-                                    required>
-
-                                </div>
-                                
-                                <div class="col-md-6">
-
-                                    <label class="form-label">
-                                        Dirección:
-                                    </label>
-
-                                    <input type="text"
-                                    class="form-control mb-2" 
-                                    id="txtDireccion"
-                                    name="txtDireccion"
-                                    placeholder="Dirección" 
-                                    value="<?php echo $persona['direccion']; ?>"
-                                    autofocus
-                                    maxlength="100" minlenght="10"
-                                    required>
-
-                                </div>
-
-                            </div>                            
+                            </div>                         
 
                         </div>
 
@@ -210,7 +202,7 @@ if(!empty($results)){
                         
                         <a type="button" 
                         class="btn btn-secondary mx-3" 
-                        href="home-clientes.php?pagina=1">
+                        href="home-productos.php?pagina=1">
                             Cancelar
                         </a>
 
@@ -227,7 +219,7 @@ if(!empty($results)){
 
                         <a type="button" 
                         class="btn btn-primary" 
-                        href="home-clientes.php?pagina=1" >
+                        href="<?php echo $_GET['tipo']=='for-client' ? 'vistaDeProductos.php?pagina=1' :'home-productos.php?pagina=1' ?>" >
                             Volver
                         </a>   
 
@@ -239,7 +231,7 @@ if(!empty($results)){
 
                   
                     </div>
-                </form>
+                </form>                
 
                 <!-- FORMULARIO -->
 
@@ -250,12 +242,5 @@ if(!empty($results)){
     </div>
 
 </div>
-
-<script>
-
-document.getElementById("sctRol").value = <?php echo $persona['rol']; ?>;
-
-</script>
-
 
 <?php include 'template/footerHome.php' ?>

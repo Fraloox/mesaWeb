@@ -1,38 +1,38 @@
 <?php
 
 if(!isset($_POST['id'])){    
-    header('Location: home-clientes.php?mensaje=error&pagina=1');
+    header('Location: home-productos.php?mensaje=error&pagina=1');
     exit();
 }
 
 include 'conexion.php';
 
 $id = $_POST['id'];
-$nombre = $_POST['txtNombre'];
-$apellido = $_POST['txtApellido'];
-$telefono = $_POST['txtTelefono'];
-$email = $_POST['txtEmail'];
-$direccion = $_POST['txtDireccion'];
+$nombre = $_POST["txtNombre"];
+$cantidad = $_POST["txtCantidad"];
+$marca = $_POST["txtMarca"];
+$precio = $_POST["txtPrecio"];
+$descripcion = $_POST["txtDescripcion"];
 
 $sentencia = $bd->prepare(
-    'UPDATE clientes 
-    SET nombre = :nombre, apellido = :apellido, telefono = :telefono, 
-    email = :email, direccion = :direccion 
+    'UPDATE productos 
+    SET nombre = :nombre, cantidad = :cantidad, marca = :marca, 
+    precio = :precio, descripcion = :descripcion 
     WHERE id = :id');
 
 // *** SET ***
 $sentencia->bindParam(':nombre', $nombre);
-$sentencia->bindParam(':apellido', $apellido);
-$sentencia->bindParam(':telefono', $telefono);
-$sentencia->bindParam(':email', $email);
-$sentencia->bindParam(':direccion', $direccion);
+$sentencia->bindParam(':cantidad', $cantidad);
+$sentencia->bindParam(':marca', $marca);
+$sentencia->bindParam(':precio', $precio);
+$sentencia->bindParam(':descripcion', $descripcion);
 
 // *** WHERE ***
 $sentencia->bindParam(':id', $id);
 
 $sentencia->execute();
 
-header('Location: home-clientes.php?mensaje=editado&pagina=1');
+header('Location: home-productos.php?mensaje=editado&pagina=1');
 exit();
 
 ?>

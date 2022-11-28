@@ -8,8 +8,8 @@
 
   if(isset($_SESSION['user_id'])){
 
-    $records = $bd->prepare(
-      'SELECT id, dni, rol
+    $records = $bd->prepare( //Seguir con la comprobacion de cliente o usuario
+      'SELECT id, dni, rol 
       FROM usuarios
       WHERE id = :id');    
     $records->bindParam(':id', $_SESSION['user_id']);
@@ -121,7 +121,7 @@
 
       </a>
 
-      <ul class="dropdown-menu dropdown-menu-end" 
+      <ul class="dropdown-menu dropdown-menu-end"
       aria-labelledby="navbarDropdown">
 
         <li>
@@ -375,7 +375,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               data-bs-target="#staticBackdrop"
               onClick="clearDatos();">
 
-                <i class="bi bi-person-plus-fill"></i>
+                <i class="bi bi-box-seam"></i>
 
               </a>
 
@@ -447,7 +447,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         ?>
 
                         <a type="button" 
-                        class="btn btn-primary"                           
+                        class="btn btn-info"                           
                         href="editar-producto.php?id=<?php echo $dato->id ?>&tipo=info">
 
                           <i class="bi bi-info-square"></i>
@@ -653,6 +653,7 @@ tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                   </div>
 
                   <div class="row mt-2">
+
                     <label class="form-label">
                       Descripción:
                     </label>
